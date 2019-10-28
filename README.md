@@ -31,15 +31,20 @@ To begin using this template, choose one of the following options to get started
    ├── ...
    ├── src                       
    │   ├── app                    # This folder contains pages, compomemnts and services
-   |   |     ├── pages                  # Contains all the individual pages (home, tabs, category, list, single-item)
-   |   |     ├── services               # Contains the item-api service that retrieves data from the JSON file
+   |   |   ├── pages              # Contains all the individual pages (home, tabs, category, list, single-item)
+   |   |   ├── services           # Contains the item-api service that retrieves data from the JSON file
    │   ├── assets                 # This folder contains images and the *data.json*
    |   ├── theme                  # The global SCSS variables to use throughout the app
    |   ├── declarations.d.ts      # A config file to make TypeScript objects available in intellisense
    |   ├── index.html             # The root index app file - This launches the app
    └── ...
 ```
-
+## Features
+1. **AdMob integration**: AdMob is Google’s mobile advertising platform that can be used to generate revenue from your app. If you choose Deco News, you will be able to earn money from your app by showing banner and interstitial ads.
+2. **Dark & Light Mode**: All the screens included in this app template are available in both dark and light modes. Therefore, you can choose between the classic light interface, or dark, modern one which is especially popular in sports news apps.
+3. **RTL support**: Ionic has always been a great framework for creating apps that use left-to-right (LTR) languages, because it was designed this way from the beginning. On the other hand, there are some languages used by millions which are read right-to-left (RTL), such as Arabic. To go the extra mile, we added RTL support to our Deco News app template.
+4. **DeepLink**: Deep linking enables app developers to link to specific products or pages within apps. Deco News comes with a preinstalled plugin, which makes it easy to respond to deeplinks through custom URL schemes and Universal/App Links on iOS and Android.
+5. **OneSignal push notifications**: Simply put, a push notification is a message that pops up on a mobile device. App publishers can send them at any time, and users don’t have to be in the app to receive them. Push notifications provide various benefits for app publishers such as promoting products or offers, improving user experience, driving users to other marketing channels etc. Building your own push notification delivery service can be complex and time-consuming, but with Deco News you will be able to effortlessly send push notifications to the users of your via OneSignal push notifications service.
 
 ## Start the project
 The project is started with the regular ionic commands.

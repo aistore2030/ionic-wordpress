@@ -18,13 +18,8 @@ import { File } from '@ionic-native/file/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 import { IonicStorageModule } from '@ionic/storage';
+import { Platform } from 'ionic-angular';
 
-// import { TranslateModule, TranslateLoader} from '@ngx-translate/core';
-// import { TranslateHttpLoader} from '@ngx-translate/http-loader';
-
-// export function HttpLoaderFactory(http: Http) {
-//   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-//   }
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,16 +29,9 @@ import { IonicStorageModule } from '@ionic/storage';
     IonicStorageModule.forRoot(),
     IonicModule.forRoot(),
     AppRoutingModule,
-    // TranslateModule.forRoot({
-    //   loader: {
-    //        provide: TranslateLoader,
-    //        useFactory: HttpLoaderFactory,
-    //        deps: [HttpClient]
-    //      }
-    //   })
   ],
   providers: [
-    StatusBar, SplashScreen, OneSignal, File, SocialSharing,
+    StatusBar, SplashScreen, OneSignal, File, SocialSharing, Platform,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],
   bootstrap: [AppComponent],

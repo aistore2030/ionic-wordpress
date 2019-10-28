@@ -51,6 +51,7 @@
     "core-js": "^2.5.4",
     "es6-promise-plugin": "4.2.2",
     "firebase": "^5.9.0",
+    "ionic-angular": "^3.9.9",
     "ionic-plugin-deeplinks": "^1.0.19",
     "ionicons": "^4.5.5",
     "onesignal-cordova-plugin": "^2.4.6",

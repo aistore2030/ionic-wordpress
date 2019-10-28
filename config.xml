@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.decouikit.newsIonic4" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>الداعي نيوز</name>
-    <description>الداعي نيوز</description>
-    <author email="decouikit@gmail.com" href="https://decouikit.com/">Deco Team</author>
+    <name>الرملة أونلاين</name>
+    <description>تطبيق الرملة أونلاين، أخبار مدينة الرملة وضواحيها</description>
+    <author email="mtafish14@outlook.com" href="http://ramlaonline.com/">TITO Team (T.T)</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />

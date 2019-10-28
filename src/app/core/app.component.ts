@@ -1,12 +1,13 @@
 import { OneSignalConfig } from './../services/one.signal.service';
 import { Component } from '@angular/core';
 import { OneSignal } from '@ionic-native/onesignal/ngx';
-import { Platform, NavController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ConfigData } from '../services/config';
 import { BookmarkService } from '../services/bookmark.service';
-// import { TranslateService } from '@ngx-translate/core';
+import { Platform } from 'ionic-angular';
+
 
 @Component({
   selector: 'app-root',
@@ -18,8 +19,8 @@ export class AppComponent {
   headerMenuItem = {};
 
   rootPage: any = 'HomePage';
-  pages: Array<{title: string, component: any, icon: string, url:string}>;
-  isPushNotificationEnabled:boolean = true;
+  pages: Array<{title: string, component: any, icon: string, url: string}>;
+  isPushNotificationEnabled = true;
 
   constructor(
     private oneSignal: OneSignal,
@@ -28,7 +29,6 @@ export class AppComponent {
     public platform: Platform,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
-    // private _translate : TranslateService
     ) {
     this.initializeApp();
 
@@ -36,17 +36,17 @@ export class AppComponent {
     this.statusBar.backgroundColorByName('white');
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'الرئيسيه', component: 'HomePage', icon: 'book', url: "home" },
-      { title: 'ألأقسام', component: "CategoryPage", icon: "list-box", url: "category" },
-      { title: 'المفضله', component: "BookmarkPage", icon: "bookmark", url: "bookmark" },
-      { title: 'معلومات عنا', component: "AboutPage", icon: "ios-flag", url: "about" },
-      { title: 'الأعدادات', component: "settings", icon: "settings", url: "settings" },
+      { title: 'الرئيسيه', component: 'HomePage', icon: 'book', url: 'home' },
+      { title: 'ألأقسام', component: 'CategoryPage', icon: 'list-box', url: 'category' },
+      { title: 'المفضله', component: 'BookmarkPage', icon: 'bookmark', url: 'bookmark' },
+      { title: 'معلومات عنا', component: 'AboutPage', icon: 'ios-flag', url: 'about' },
+      { title: 'الأعدادات', component: 'settings', icon: 'settings', url: 'settings' },
     ];
   }
 
   initializeApp() {
-    localStorage.setItem("", "true")
-    let self = this;
+    localStorage.setItem('', 'true');
+    const self = this;
     this.platform.ready().then(() => {
 
       // Uncommnets this code fore prodaction
@@ -67,59 +67,72 @@ export class AppComponent {
       //     self.defaultLoad();
       //   }
       // });
-
+      self.setLocalStorage();
       self.defaultLoad();
     });
   }
 
+  setLocalStorage() {
+    localStorage.setItem('isRTLEnabled', 'true');
+    document.getElementsByTagName('ion-menu')[0]
+            .setAttribute('side', 'end');
+    document.getElementsByTagName('html')[0]
+            .setAttribute('dir', 'rtl');
+            console.log('Here', true);
+  }
+
   resetData(data) {
-    let settingsObject = JSON.parse(data);
+    const settingsObject = JSON.parse(data);
     if (settingsObject.isLightColorSelected) {
-      localStorage.setItem('isLightColorSelected', settingsObject.isLightColorSelected + "");
+      localStorage.setItem('isLightColorSelected', settingsObject.isLightColorSelected + '');
     } else {
-      localStorage.setItem('isLightColorSelected', "true");
+      localStorage.setItem('isLightColorSelected', 'true');
     }
     if (settingsObject.isPushNotificationEnabled) {
-      localStorage.setItem('isPushNotificationEnabled', settingsObject.isPushNotificationEnabled + "");
+      localStorage.setItem('isPushNotificationEnabled', settingsObject.isPushNotificationEnabled + '');
     } else {
-      localStorage.setItem('isPushNotificationEnabled', "true");
+      localStorage.setItem('isPushNotificationEnabled', 'true');
     }
     if (settingsObject.isRTLEnabled) {
-      localStorage.setItem('isRTLEnabled', settingsObject.isRTLEnabled + "");
+      localStorage.setItem('isRTLEnabled', settingsObject.isRTLEnabled + '');
     } else {
-      localStorage.setItem('isRTLEnabled', "true");
+      localStorage.setItem('isRTLEnabled', 'true');
     }
 
-    localStorage.setItem('bookmark', settingsObject.bookmark + "");
+    localStorage.setItem('bookmark', settingsObject.bookmark + '');
     this.defaultLoad();
   }
 
 
   defaultLoad() {
-    if (localStorage.getItem('isRTLEnabled') == "true") {
+    if (localStorage.getItem('isRTLEnabled') === 'true') {
       document.getElementsByTagName('ion-menu')[0].setAttribute('side', 'end');
       document.getElementsByTagName('html')[0].setAttribute('dir', 'rtl');
+      this.platform.setDir('rtl', true);
+      this.platform.setLang('ar', true);
     }
     if (!localStorage.getItem('isLightColorSelected')) {
-      localStorage.setItem('isLightColorSelected',"true");
+      localStorage.setItem('isLightColorSelected', 'true');
     } else {
-      let isLightColorSelected = localStorage.getItem('isLightColorSelected') == "true";
-      let theme = isLightColorSelected ? "colorLight" : "colorDark";
-      document.getElementsByTagName("body")[0].setAttribute("class", theme);
+      const isLightColorSelected = localStorage.getItem('isLightColorSelected') === 'true';
+      const theme = isLightColorSelected ? 'colorLight' : 'colorDark';
+      document.getElementsByTagName('body')[0].setAttribute('class', theme);
     }
 
 
     this.statusBar.styleDefault();
     this.splashScreen.hide();
+
+    
     if (ConfigData.oneSignal && ConfigData.oneSignal.appID && ConfigData.oneSignal.googleProjectId) {
-        this.oneSignal.startInit(ConfigData.oneSignal.appID, ConfigData.oneSignal.googleProjectId)
+        this.oneSignal.startInit(ConfigData.oneSignal.appID, ConfigData.oneSignal.googleProjectId);
         this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification);
-        this.oneSignal.endInit()
+        this.oneSignal.endInit();
     }
     let pushNotificationEnabledStorageValue = localStorage.getItem('isPushNotificationEnabled');
     if (!pushNotificationEnabledStorageValue) {
-        localStorage.setItem('isPushNotificationEnabled', "true");
-        pushNotificationEnabledStorageValue = "true";
+        localStorage.setItem('isPushNotificationEnabled', 'true');
+        pushNotificationEnabledStorageValue = 'true';
     }
     this.oneSignal.setSubscription(this.isPushNotificationEnabled);
   }
@@ -127,20 +140,4 @@ export class AppComponent {
   openPage(page) {
     this.navController.navigateForward([page.url], {});
   }
-
-  // private _initTranslate()
-  // {
-  //    // Set the default language for translation strings, and the current language.
-  //    this._translate.setDefaultLang('en');
-
-
-  //    if (this._translate.getBrowserLang() !== undefined)
-  //    {
-  //        this._translate.use(this._translate.getBrowserLang());
-  //    }
-  //    else
-  //    {
-  //        this._translate.use('en'); // Set your language here
-  //    }
-  // }
 }

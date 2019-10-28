@@ -1,0 +1,66 @@
+<ion-header box-shadow>
+  <ion-toolbar>
+      <ion-buttons slot="end" (click)="onClickSearch()">
+          <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-buttons>
+      <!-- <ion-title text-uppercase>DECO NEWS</ion-title> -->
+      <img src="../assets/imgs/decoLogo.png" alt="" style="width:30px; height:25px; display: block; margin: 0 auto;"/>
+    <ion-buttons slot="start">
+      <ion-menu-button defaultHref="/"></ion-menu-button>
+    </ion-buttons>
+    <!-- <ion-title>الداعي نيوز</ion-title> -->
+  </ion-toolbar>
+  <ion-toolbar>
+    <!-- Segment Btton Home Page -->
+    <ion-segment [(ngModel)]="selectedItem">
+      <ion-segment-button text-capitalize [value]="item.name" *ngFor="let item of categories" (click)="refreshData(item)">
+        {{item.name}}
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+<!-- Content -->
+<ion-content>
+  <!-- searchbar -->
+  <ion-searchbar *ngIf="isShowSearchBar" [(ngModel)]="searchTerm" (ionChange)="setFilteredPosts()" placeholder="بحث"></ion-searchbar> 
+  
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <!-- Featured News -->
+        <h1 text-size-lg>أخبار مميزة</h1>
+        <!-- Slider For Featured News -->
+        <ion-slides #wizardSlider pager="true">
+          <ion-slide background-size padding *ngFor="let item of posts" [ngStyle]="{'background-image': 'url(' + item.image + ')'}" (click)="openSinglePost(item)">
+            <ion-button fill="clear" bookMark (click)="bookmark(item, $event)">
+              <ion-icon icon-small name="ios-bookmark" margin-left [ngClass]="{'active' : item.bookmark}"></ion-icon>
+            </ion-button>
+            <span category border-radius text-uppercase>{{item.category}}</span>
+            <h2 class="ion-text-start" wizard-title [innerHTML]="getHtmlTitle(item.title)"></h2>
+            <div clearfix></div>
+            <!-- Time -->
+            <ion-chip>
+              <ion-icon icon name="ios-stopwatch"></ion-icon>
+              <ion-label text-size-p class="ion-margin-end">{{item.time | date:'d MMMM yyyy'}}</ion-label>
+            </ion-chip>
+          </ion-slide>
+        </ion-slides>
+      </ion-col>
+      <!-- Name Category -->
+      <ion-col size="12" no-padding *ngIf="filteredNews.length">
+        <h1 padding-start text-size-lg>{{selectedCategory ? selectedCategory.name:""}}</h1>
+      </ion-col>
+      <!-- List Category Posts -->
+      <ion-col size="12" size-md="3" *ngFor="let item of filteredNews">
+        <news-item-home [data]="item"></news-item-home>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

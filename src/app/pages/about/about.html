@@ -1,0 +1,111 @@
+<!-- Page About -->
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="end" (click)="onClickSearch()">
+            <ion-icon slot="icon-only" name="search"></ion-icon>
+        </ion-buttons>
+        <!-- <ion-title text-uppercase>DECO NEWS</ion-title> -->
+        <!-- <img src="../assets/imgs/decoLogo.png" alt="" /> -->
+      <ion-buttons slot="start">
+        <ion-menu-button defaultHref="/"></ion-menu-button>
+      </ion-buttons>
+      <ion-title text-uppercase>معلومات</ion-title>
+    </ion-toolbar>
+</ion-header>
+<!-- Content -->
+<ion-content>
+  <ion-searchbar *ngIf="isShowSearchBar" [(ngModel)]="searchTerm" (ionChange)="setFilteredPosts()" placeholder="بحث"></ion-searchbar> 
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" text-center align-self-start>
+        <div logo padding-vertical>
+          <img src="../assets/imgs/decoLogo.png" alt="" />
+          <h1>الداعي نيوز</h1>
+          <p>
+وكالة اخبارية عراقية ناطقة بالعربية تهتم بالشأن العراقي والعربي و الاقليمي والدولي وكل مايعنى به الانسان .
+معتمدة لدى نقابة الصحفيين العراقيين بالرقم ٥٥٢ في ٢٠٠٨</p>
+
+          <p>هدف الوكالة :
+ تهدف وكالة الداعي نيوز الى اشاعة مفاهيم الحياة والحرية والديمقراطية وقبول الاخر والانفتاح على العالم ودعم التعايش السلمي بين ابناء المعمورة كافة</p>
+<p> نعمل في الوكالة على نقل الاخبار والوقائع دون تزييف او تحريف، والتعريف بالحقيقة ونشرها بين افراد المجتمع عبر تسليط الضوء على الاحداث ودعم ما يتناسب منها مع الحياة ونمائها وتصويب ما من شأنه الاساءة الى الانسانية والحياة.</p>
+<p>لانعتمد التجريح او التشهير  اسلوبا ولا نتبنى الدعوة الى العداء و الكراهية منهجا لذلك نحن لسنا جزء من اي صراع ولا طرف فيه ولامسببا له بل على العكس فنحن نعتمد منهجا فكريا بناءً ونمتاز بمستوى عال من المهنية جعلنا في تماس مباشر مع الاحداث وفي حالة من الشفافية اضفت وضوحا على ما نقدمه من انتاج اخباري واعلامي ندعو به ومن خلال ما يشير اليه شعار وكالتنا "الى الحياة"
+</p>
+<h2 header-title>الداعي نيوز ... ندعو للحياة</h2>
+
+        </div>
+      </ion-col>
+      <ion-col size="12" align-self-end box-shadow no-padding>
+        <ion-item lines="none">
+          <h2 header-title>الخدمات التي تقدمها الوكالة : </h2>
+        </ion-item>
+        <ion-item lines="none">
+          <img slot="end" src="../assets/imgs/checkmark.png" alt="">
+          <ion-label>
+            <h3 text-size-md>١- تغطية إعلامية على مدار الساعة لكل الأحداث المحلية والعربية والدولية .</h3>
+          </ion-label>
+        </ion-item>
+
+        <ion-item lines="none">
+          <img slot="end" src="../assets/imgs/checkmark.png" alt="">
+          <ion-label>
+              <h3 text-size-md>٢- تغطية إعلامية لكل فعاليات و نشاطات المؤسسات الرسمية و شبه الرسمية .</h3>
+          </ion-label>
+        </ion-item>
+
+        <ion-item lines="none">
+          <img slot="end" src="../assets/imgs/checkmark.png" alt="">
+          <ion-label>
+            <h3 text-size-md>٣- استلام شكاوى ومناشدات المواطنين وعرضها أمام أنظار الجهات المعنية والمسؤولة . </h3>
+          </ion-label>
+        </ion-item>
+
+        <ion-item lines="none">
+          <img slot="start" src="../assets/imgs/checkmark.png" alt="">
+          <ion-label>
+            <h3 text-size-md>٤- التعاون الإعلامي مع كل المؤسسات الإعلامية الحكومية وغير الحكومية . </h3>
+          </ion-label>
+        </ion-item>
+
+        <ion-item lines="none">
+          <img slot="end" src="../assets/imgs/checkmark.png" alt="">
+          <ion-label>
+            <h3 text-size-md>٥- نشر مقالات الكتّاب والمثقفين وفي كافة المجالات وبشكل دوري .</h3>
+          </ion-label>
+        </ion-item>
+
+        <ion-item lines="none">
+          <img slot="start" src="../assets/imgs/checkmark.png" alt="">
+          <ion-label>
+            <h3 text-size-md>٦- التسويق الالكتروني و خدمة الاعلانات الترويجية على موقع الوكالة وصفحات التواصل الاجتماعي .</h3>
+          </ion-label>
+        </ion-item>
+
+        <ion-item lines="none">
+          <img slot="start" src="../assets/imgs/checkmark.png" alt="">
+          <ion-label>
+              <h3 text-size-md>٧- تنظيم الندوات والمؤتمرات والاحتفاليات وغيرها من المناسبات الرسمية الاخرى</h3>
+          </ion-label>
+        </ion-item>
+
+        <ion-item lines="none">
+          <img slot="start" src="../assets/imgs/checkmark.png" alt="">
+          <ion-label>
+            <h3 text-size-md>٨- تدريب وتطوير الكوادر الاعلامية في المجالات كافة وتنظيم ورش العمل والدورات التدريبية الخاصة بذلك .</h3>
+          </ion-label>
+        </ion-item>
+
+        <ion-item lines="none">
+          <img slot="end" src="../assets/imgs/checkmark.png" alt="">
+          <ion-label>
+            <h3 text-size-md>٩- اداء دور المنسق بين منظمات المجتمع المدني والجهات الداعمة الرسمية، لرعاية برامج الدعم للشرائح المتعففه من الايتام والارامل  والفقراء وفاقدي المعيل .</h3>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer transparent>
+  <ion-toolbar>
+    
+  </ion-toolbar>
+</ion-footer>

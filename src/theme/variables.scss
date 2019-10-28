@@ -1,0 +1,266 @@
+// Ionic Variables and Theming. For more info, please see:
+// http://ionicframework.com/docs/theming/
+
+/** Ionic CSS Variables **/
+:root {
+
+/* Settings Fonts Size And Icon Size
+=======================================================
+=======================================================*/
+  --fallback-color: red;
+  --h1-font-size: 20px;
+  --h2-font-size: 18px;
+  --h3-font-size: 16px;
+  --h4-font-size: 15px;
+  --h5-font-size: 14px;
+  --h6-font-size: 12px;
+  --text-font-size: 14px;
+
+/* Settings Fonts Size Icon
+=======================================================
+=======================================================*/
+
+  --icon-size-small: 20px;
+  --icon--size-medium: 32px;
+  --icon-size-large: 60px;
+
+/* Settings Font Span
+=======================================================
+=======================================================*/
+
+  --span-size-small: 12px;
+  --span-size-medium: 24px;
+  --span-size-large: 30px;
+
+}
+
+/* SETTINGS TOOLBAR
+=======================================================
+=======================================================*/
+.header-md:after,
+.footer-md:before {
+  background-image: none !important;
+}
+
+/* INCLUDE FONTS
+=======================================================
+=======================================================*/
+@import "fontello";
+@import "rtl";
+
+/* SETTINGS FONT SIZE
+=======================================================
+=======================================================*/
+[text-size-xl] {
+  font-size: var(--h1-font-size, 20px) !important;
+  color: var(--deco-light, #1b1e28);
+}
+
+[text-size-lg] {
+  font-size: var(--h2-font-size, 18px) !important;
+  color: var(--deco-light, #1b1e28);
+}
+
+[text-size-md] {
+  font-size: var(--h3-font-size, 16px) !important;
+  color: var(--deco-light, #1b1e28);
+}
+
+[text-size-xs] {
+  font-size: var(--h4-font-size, 14px) !important;
+  color: var(--deco-light, #1b1e28);
+}
+
+[text-size-sm] {
+  font-size: var(--h5-font-size, 15px) !important;
+  color: var(--deco-light, #1b1e28);
+}
+
+[text-size-p] {
+  font-size: var(--text-font-size, 14px) !important;
+  color: var(--deco-light, #1b1e28);
+}
+
+[text-nowrap] {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+page-home {
+  .swiper-pagination.swiper-pagination-bullets {
+    bottom: 5px !important;
+
+    .swiper-pagination-bullet-active {
+      --bullet-background: var(--deco-light, #1b1e28) !important;
+      background: var(--bullet-background);
+
+    }
+  }
+}
+
+
+/* SETTINGS BUTTON
+=======================================================
+=======================================================*/
+[default-button] {
+  --padding-top: 20px;
+  --padding-bottom: 20px;
+  --background: var(--deco-light, #1b1e28);
+  --color: var(--deco-primary, #ffffff);
+  --ripple-color: transparent;
+  border-radius: 4px;
+  overflow: hidden;
+  min-height: 45px;
+  text-transform: inherit;
+}
+
+
+/* SETTINGS CATEGORY
+=======================================================
+=======================================================*/
+[category] {
+  position: absolute;
+  top: 16px;
+  z-index: 999;
+  left: 16px;
+  border-radius: 4px;
+  background: var(--deco-danger, #f53d3d);
+  padding: 5px;
+  font-size: 10px;
+  color: var(--deco-category, #fff);
+}
+
+/* SETTINGS COLOR BACKGROUND OUR APP
+=======================================================
+=======================================================*/
+ion-content {
+  --background: var(--deco-backgroundColor, #ffffff);
+}
+
+ion-list {
+  padding-top: 0 !important;
+}
+
+ion-item {
+  --background: var(--deco-backgroundColor, #ffffff);
+}
+
+ion-toolbar {
+  --background: var(--deco-toobarBackground, #ffffff);
+  --color: var(--deco-toobarButton, #AAB2B7);
+
+  ion-title {
+    --color: var(--deco-light, #1b1e28);
+    font-size: 16px;
+  }
+}
+
+
+/* SETTINGS CHIP
+=======================================================
+=======================================================*/
+ion-chip {
+  --background: transparent;
+  margin: 0;
+  padding-top: 0;
+  -webkit-padding-start: 4px;
+  padding-inline-start: 4px;
+  padding-inline-end: 0px;
+
+  .ripple-effect {
+    display: none !important;
+  }
+
+  ion-icon {
+    color: var(--deco-colorIcon, #CCCBDA);
+  }
+  ion-label {
+    color: var(--deco-colorIconText, #7F7E96) !important;
+  }
+}
+
+/* SETTINGS SEGMENT
+=======================================================
+=======================================================*/
+ion-segment-button {
+  --background: var(--deco-toobarBackground, #ffffff);
+  --background-checked: var(--deco-toobarBackground, #ffffff);
+  --background-activated: var(--deco-toobarBackground, #ffffff);
+  --color: var(--deco-light, #1b1e28);
+  --color-checked: var(--deco-light, #1b1e28);
+}
+
+/* SETTINGS COLOR AND SIZE ICON
+=======================================================
+=======================================================*/
+[icon-small] {
+  color: var(--deco-colorIcon, #CCCBDA);
+  font-size: var(--icon-size-small, 20px);
+}
+
+/* Image
+=======================================================
+=======================================================*/
+
+img {
+  object-fit: cover;
+}
+
+/* Settings bookmark
+=======================================================
+=======================================================*/
+[bookMark] {
+  ion-icon {
+    &.active {
+      color: var(--deco-danger, #f53d3d) !important;
+    }
+  }
+}
+
+/* Default Overview Ionic Section
+=======================================================
+=======================================================*/
+[background-size] {
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+
+[border-radius] {
+  border-radius: 4px;
+}
+
+[font-bold] {
+  font-weight: bold !important;
+}
+
+
+[no-box-shadow] {
+  box-shadow: none !important;
+}
+
+[box-shadow] {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15) !important;
+  z-index: 999;
+}
+
+[transparent]{
+  --background: transparent;
+}
+
+[clearfix] {
+  display: block;
+  clear: both;
+}
+
+.item.sc-ion-label-md-h, .item .sc-ion-label-md-h {
+  white-space: inherit;
+}
+.sc-ion-label-md-s h3, .sc-ion-label-md-s h4, .sc-ion-label-md-s h5, .sc-ion-label-md-s h6 {
+
+    color: black;
+}
+
+ion-card-content.ion-no-padding.md.card-content-md.hydrated {
+    color: black;
+}

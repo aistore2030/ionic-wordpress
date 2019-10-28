@@ -1,0 +1,9 @@
+:host-context(page-category) {
+  [text-size-md],
+  [text-size-xs] {
+    font-weight: 400;
+  }
+  ion-card {
+    --background: var(--deco-toobarBackground, #ffffff) !important;
+  }
+}

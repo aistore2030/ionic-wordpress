@@ -1,0 +1,17 @@
+:host-context(page-bookmark) {
+  ion-grid,
+  ion-row {
+    height: 100%;
+  }
+
+  ion-col {
+    position: relative;
+
+    ion-button {
+      position: absolute;
+      top: 18px;
+      right: 5px;
+      font-size: 12px !important;
+    }
+  }
+}

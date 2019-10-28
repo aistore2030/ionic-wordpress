@@ -1,0 +1,44 @@
+/* Sytle Main Menu
+==================================*/
+:host-context(app-root) {
+  --meni-background: #1B1E28;
+  --menu-color: #fff;
+
+  ion-content {
+    --background: var(--meni-background, #1B1E28);
+  }
+
+  ion-grid,
+  ion-row {
+    height: 100%;
+  }
+
+  /* SETTINGS MAIN MENU
+  =======================================================
+  =======================================================*/
+  ion-menu-toggle {
+    [icon-small] {
+      margin-right: 10px;
+    }
+  }
+
+  [button-link] {
+    margin-right: 10px;
+  }
+
+  ion-list {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  ion-item {
+    --background: var(--meni-background, #1B1E28);
+
+    [icon-small],
+    [text-size-xs] {
+      color: var(--menu-color, #fff);
+    }
+  }
+}

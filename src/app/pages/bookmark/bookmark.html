@@ -1,0 +1,39 @@
+<!-- Page About -->
+<ion-header box-shadow>
+    <ion-toolbar>
+        <ion-buttons slot="end">
+            <ion-icon slot="icon-only" name="search" (click)="onClickSearch()"></ion-icon>
+        </ion-buttons>
+        <!-- <ion-title text-uppercase>DECO NEWS</ion-title> -->
+        <img src="../assets/imgs/decoLogo.png" alt="" style="width:30px; height:25px; display: block; margin: 0 auto;"/>
+      <ion-buttons slot="start">
+        <ion-menu-button defaultHref="/"></ion-menu-button>
+      </ion-buttons>
+      <!-- <ion-title text-uppercase>الداعي نيوز</ion-title> -->
+    </ion-toolbar>
+</ion-header>
+<!-- Content -->
+<ion-content>
+  <ion-searchbar *ngIf="isShowSearchBar" [(ngModel)]="searchTerm" (ionChange)="setFilteredBookmark()" placeholder="بحث"></ion-searchbar> 
+  <ion-grid>
+    <ion-row *ngIf="posts.length">
+      <ion-col size="12">
+        <h2 text-size-lg margin-bottom padding-start>المرجعية الأخبار</h2>
+        <ion-button size="small" text-size-p fill="clear" (click)="clearAll()">امسح الكل</ion-button>
+        <div clearfix></div>
+        <div list-bokmark margin-bottom *ngFor="let item of filteredNews">
+          <news-item [data]="item" [data]="item" (onBookmark)="onBookmark($event)"></news-item>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="!posts.length" class="ion-align-items-center">
+      <ion-col>
+        <div no-post text-center>
+          <img src="../assets/imgs/decoLogo.png" alt="" />
+          <h1 text-size-xl>Uups, no data!</h1>
+          <p text-size-md>أضف شيئًا إلى الإشارات المرجعية من خلال النقر على أيقونة الإشارة المرجعية</p>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,53 @@
+<!-- Page Form-->
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="end">
+            <ion-icon slot="icon-only" name="search"></ion-icon>
+        </ion-buttons>
+        <!-- <ion-title text-uppercase>DECO NEWS</ion-title> -->
+        <img src="../assets/imgs/decoLogo.png" alt="" style="width:30px; height:25px; display: block; margin: 0 auto;"/>
+      <ion-buttons slot="start">
+        <ion-menu-button defaultHref="/"></ion-menu-button>
+      </ion-buttons>
+      <!-- <ion-title text-uppercase>الداعي نيوز</ion-title> -->
+    </ion-toolbar>
+</ion-header>
+<!-- Content -->
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <!-- Input type name-->
+        <ion-item margin-top lines="none" box-shadow>
+          <ion-input type="text" placeholder="Your Name" [(ngModel)]="authorName"></ion-input>
+          <!-- Error for name valid-->
+          <div item-content>
+            <ion-icon ion-text *ngIf="!isAuthorValid" color="danger" name="remove-circle"></ion-icon>
+          </div>
+        </ion-item>
+        <!-- Input type email-->
+        <ion-item margin-top lines="none" box-shadow>
+          <ion-input type="text" placeholder="Your Email Address" [(ngModel)]="authorEmail"></ion-input>
+          <!-- Error for email valid-->
+          <div item-content>
+            <ion-icon ion-text *ngIf="!isEmailValid" color="danger" name="remove-circle"></ion-icon>
+          </div>
+        </ion-item>
+        <!-- Input type Comment -->
+        <ion-item textarea margin-top lines="none" box-shadow textarea>
+          <ion-textarea placeholder="Comment" [(ngModel)]="comment"></ion-textarea>
+          <!-- Error for comments valid-->
+          <div item-content>
+            <ion-icon margin-top ion-text *ngIf="!isCommentValid" color="danger" name="remove-circle"></ion-icon>
+          </div>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <!-- Wtite a comment-->
+    <ion-button default-button expand="full" text-capitalize box-shadow (click)="addComment($event)">Write a Comment</ion-button>
+  </ion-toolbar>
+</ion-footer>

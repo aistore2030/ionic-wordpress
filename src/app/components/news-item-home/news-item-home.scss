@@ -1,0 +1,23 @@
+:host-context(news-item-home) {
+  ion-card {
+    --background: var(--deco-toobarBackground, #ffffff);
+
+    img {
+      height: 100px;
+    }
+
+    ion-card-content {
+      padding: 8px;
+    }
+
+    [card-image] {
+      position: relative;
+
+      [category] {
+        position: absolute;
+        top: 8px;
+        left: 8px;
+      }
+    }
+  }
+}

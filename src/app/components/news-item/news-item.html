@@ -1,0 +1,20 @@
+<ion-item lines="none" box-shadow no-padding border-radius *ngIf="data" (click)="openSinglePost(data)">
+  <ion-thumbnail slot="end">
+    <img border-radius [src]="data.image" alt="">
+    <span border-radius text-uppercase category>{{data.category}}</span>
+  </ion-thumbnail>
+  <ion-label>
+    <p text-wrap text-size-xs margin-bottom [innerHTML]=data.title></p>
+    <div data-info>
+      <!-- Data time -->
+      <ion-chip>
+        <ion-icon class="ion-no-margin" icon-small name="ios-stopwatch"></ion-icon>
+        <ion-label text-size-p>{{data.time | date:'d MMMM yyyy'}}</ion-label>
+      </ion-chip>
+      <!-- Bookmark -->
+      <div bookMark (click)="bookmark(data, $event)">
+        <ion-icon icon-small name="ios-bookmark" margin-left [ngClass]="{'active' : data.bookmark}"></ion-icon>
+      </div>
+    </div>
+  </ion-label>
+</ion-item>

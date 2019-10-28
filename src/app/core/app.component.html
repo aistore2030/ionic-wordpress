@@ -1,0 +1,47 @@
+<ion-app>
+  <ion-split-pane>
+    <ion-menu>
+      <ion-header>
+        <!-- <ion-toolbar>
+          <ion-title text-uppercase>Menu</ion-title>
+        </ion-toolbar> -->
+      </ion-header>
+      <!-- Content -->
+      <ion-content>
+        <ion-row padding>
+          <ion-col size="12" class="ion-align-self-start">
+           <img src="../assets/imgs/decoLogo.png" alt="">
+          </ion-col>
+          <ion-col size="12" class="ion-align-self-center">
+            <!-- Menu List -->
+            <ion-list class="ion-no-padding">
+              <ion-menu-toggle auto-hide="false" *ngFor="let p of pages">
+                <ion-item lines="none" class="ion-no-padding" [routerDirection]="'root'" (click)="openPage(p)">
+                  <ion-icon icon-small name="{{p.icon}}"></ion-icon>
+                  <ion-label>
+                    <h1 text-size-xs>{{p.title}}</h1>
+                  </ion-label>
+                </ion-item>
+              </ion-menu-toggle>
+            </ion-list>
+          </ion-col>
+          <ion-col size="12" class="ion-align-self-end">
+            <a button-link target="_blank" href="#">
+              <img logo src="../assets/imgs/fb.png" alt="" />
+            </a>
+            <a button-link target="_blank" href="#">
+              <img logo src="../assets/imgs/tw.png" alt="" />
+            </a>
+            <a button-link target="_blank" href="#">
+              <img logo src="../assets/imgs/yt.png" alt="" />
+            </a>
+            <a button-link target="_blank" href="#">
+              <img logo src="../assets/imgs/in.png" alt="" />
+            </a>
+          </ion-col>
+        </ion-row>
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet main></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>

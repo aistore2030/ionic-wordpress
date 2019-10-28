@@ -1,0 +1,39 @@
+<!-- Page Form-->
+<ion-header box-shadow>
+  <ion-toolbar>
+      <ion-buttons slot="end" (click)="onClickSearch()">
+          <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-buttons>
+      <!-- <ion-title text-uppercase>DECO NEWS</ion-title> -->
+      <img src="../assets/imgs/decoLogo.png" alt="" style="width:30px; height:25px; display: block; margin: 0 auto;"/>
+    <ion-buttons slot="start">
+      <ion-menu-button defaultHref="/"></ion-menu-button>
+    </ion-buttons>
+    <!-- <ion-title text-uppercase>الداعي نيوز</ion-title> -->
+  </ion-toolbar>
+</ion-header>
+<!-- Content -->
+<ion-content>
+  <ion-searchbar *ngIf="isShowSearchBar" [(ngModel)]="searchTerm" (ionChange)="setFilteredPosts()" placeholder="بحث"></ion-searchbar> 
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-item transparent>
+          <ion-lable text-size-xs>تفعيل الأشعارات</ion-lable>
+          <ion-checkbox slot="end" [(ngModel)]="isPushNotificationEnabled" (ionChange)="ionChange($event)"></ion-checkbox>
+        </ion-item>
+        <!-- <ion-item transparent>
+          <ion-lable text-size-xs>اللغه العربيه</ion-lable>
+          <ion-checkbox slot="end" [(ngModel)]="isRTLEnabled" (ionChange)="ionChangeRTL($event)"></ion-checkbox>
+        </ion-item> -->
+        <!-- <ion-item transparent>
+            <ion-lable text-size-xs>الإنجليزية</ion-lable>
+            <ion-checkbox slot="end" [(ngModel)]="" (ionChange)=""></ion-checkbox> -->
+          <!-- </ion-item> -->
+
+        <ion-button default-button margin (click)="changeTheme('autumn')">وضع الفاتح</ion-button>
+        <ion-button default-button margin (click)="changeTheme('night')">وضع الغامض</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

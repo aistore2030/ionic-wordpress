@@ -1,0 +1,68 @@
+<!-- Page Single Page -->
+<ion-header box-shadow>
+    <ion-toolbar>
+      <ion-buttons slot="end">
+          <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-buttons>
+      <!-- <ion-title text-uppercase>DECO NEWS</ion-title> -->
+      <img src="../assets/imgs/decoLogo.png" alt="" style="width:30px; height:25px; display: block; margin: 0 auto;"/>
+      <ion-buttons slot="start">
+        <ion-menu-button defaultHref="/"></ion-menu-button>
+      </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<!-- Content -->
+<ion-content>
+  <ion-grid no-padding>
+    <ion-row no-padding>
+      <ion-col col-12 no-padding *ngIf="post">
+        <!-- Header Images -->
+        <div no-post-image>
+          <div background-size id="elastic-header" [hidden]="!post.image"
+          [ngStyle]="{'background-image': 'url(' + post.image + ')'}"></div>
+        </div>
+        <ion-card padding single-page box-shadow border-radius>
+          <ion-card-header class="ion-no-padding">
+            <!-- Name Category -->
+            <span category class="ion-float-start" border-radius>{{post.category}}</span>
+            <!-- Bookmark -->
+            <ion-button class="ion-float-end" fill="clear" bookMark float-end (click)="bookmark(post, $event)" size="small">
+              <ion-icon slot="icon-only" icon-small name="ios-bookmark" [ngClass]="{'active' : post.bookmark}"></ion-icon>
+            </ion-button >
+            <!-- Share -->
+            <ion-button class="ion-float-end" (click)="share(post, $event)" float-end fill="clear" size="small">
+              <ion-icon slot="icon-only" icon-small  name="share" ></ion-icon>
+            </ion-button>
+            <div clearfix></div>
+            <!--- Title Post -->
+            <h1 text-size-lg [innerHTML]="htmlTitle"></h1>
+            <ion-item no-padding lines="none" transparent>
+              <!-- Time -->
+              <ion-chip slot="start">
+                <ion-icon icon name="ios-stopwatch"></ion-icon>
+                <ion-label text-size-p class="ion-margin-end">{{post.time | date:'d MMMM yyyy'}}</ion-label>
+              </ion-chip>
+              <!-- Commnets -->
+              <ion-chip (click)="openCommentList(post, $event)">
+                <ion-icon icon name="ios-chatbubbles"></ion-icon>
+                <ion-label text-size-p>تعليقات</ion-label>
+              </ion-chip>
+            </ion-item>
+          </ion-card-header>
+          <!-- Content -->
+          <ion-card-content class="ion-no-padding">
+            <!--- Content with web site-->
+            <div [innerHTML]="htmlContent"></div>
+          </ion-card-content>
+        </ion-card>
+        <news-list [categoryId]="post.categoryId" [postId]="post.id" [title]="" (onItemClick)="onItemClick($event)"></news-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <!-- Wtite a comment-->
+    <ion-button expand="full" default-button (click)="openComment(post, $event)">أكتب تعليقا</ion-button>
+  </ion-toolbar>
+</ion-footer>

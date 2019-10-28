@@ -1,0 +1,48 @@
+:host-context(news-item) {
+
+  :host {
+      --size-thumbnail: 120px;
+  }
+
+  ion-item {
+    --background: var(--deco-toobarBackground, #ffffff);
+  }
+
+  ion-thumbnail {
+    position: relative;
+    height: var(--size-thumbnail, 120px);
+    width: var(--size-thumbnail, 120px);
+  }
+
+  [slot=start] {
+    margin-inline-start: 8px;
+  }
+
+  [category] {
+      position: absolute;
+      top: 8px;
+      z-index: 999;
+      left: 8px;
+      border-radius: 4px;
+      background: var(--deco-danger, #f53d3d);
+      padding: 5px;
+      font-size: 10px;
+      color: var(--deco-category, #ffffff);
+  }
+
+  ion-label {
+    padding: 5px;
+    height: 100%;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+  }
+
+  [data-info]{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+
+}

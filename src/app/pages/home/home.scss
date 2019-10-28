@@ -1,0 +1,84 @@
+/* Settings Segments Button
+===============================*/
+:host-context(page-home) {
+
+  ion-segment {
+    display: flex;
+    flex-direction: row;
+    overflow: auto;
+    justify-content: flex-start;
+
+    ion-segment-button.segment-button {
+      width: auto !important;
+      overflow: visible;
+      margin: 0 5px;
+    }
+  }
+
+  ion-slides {
+    padding-bottom: 40px;
+
+    .slide-zoom {
+      height: 100%;
+      text-align: left;
+    }
+  }
+  /* Settings Slider Image*/
+  [background-size] {
+    position: relative;
+    height: 230px;
+    overflow: hidden;
+    border-radius: 4px !important;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      top: 0;
+      background: rgba(0, 0, 0, 0.34);
+    }
+    /* Settings Wizard */
+    [wizard-title] {
+      color: var(--deco-sliderColor, #ffffff);
+      font-size: 18px;
+      z-index: 999;
+      padding: 16px;
+      left: 0;
+      position: absolute;
+      bottom: 25px;
+    }
+    /* Settings DataTime */
+    ion-chip {
+      z-index: 999;
+      padding: 16px;
+      position: absolute;
+      bottom: 10px;
+      left: 0;
+      font-size: 14px;
+
+      ion-icon,
+      ion-label {
+        color: var(--deco-sliderColor, #ffffff) !important;
+      }
+    }
+    /* Settings BookMark */
+    [bookMark] {
+      z-index: 99;
+      position: absolute;
+      top: 5px;
+      right: 16px;
+
+      ion-icon {
+        color: var(--deco-sliderColor, #ffffff);
+      }
+    }
+  }
+  .searchbar-search-icon {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+  
+}

@@ -1,0 +1,39 @@
+:host-context(page-form) {
+  .scroll-content {
+    padding-bottom: 0 !important;
+  }
+
+  ion-item  {
+    --background: var(--deco-toobarBackground, #ffffff) !important;
+    --color: var(--deco-light, #1b1e28);
+  }
+
+  ion-textarea {
+    background: var(--deco-toobarBackground, #ffffff) !important;
+  }
+
+  ion-grid {
+    height: 100%;
+    padding: 0 !important;
+
+    ion-row {
+      height: 100%;
+    }
+  }
+
+  .item.item-input.input-has-focus .item-inner,
+  .item.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+  }
+
+  [box-shadow] {
+    margin-top: 10px;
+  }
+
+  [textarea] {
+    background: var(--deco-toobarBackground, #ffffff) !important;
+    height: calc(100% - 135px);
+    min-height: 280px;
+  }
+}

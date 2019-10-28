@@ -1,0 +1,14 @@
+<!-- News list -->
+<ion-row>
+  <ion-col col-12>
+    <h2 text-size-lg padding-start>أخبار حديثة</h2>
+  </ion-col>
+  <ion-col size="12" *ngFor="let item of posts">
+    <news-item [data]="item" (onItemClick)="itemClick($event)"></news-item>
+  </ion-col>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-row>

@@ -1,0 +1,20 @@
+<ion-card no-margin box-shadow border-radius *ngIf="data" (click)="openSinglePost(data)">
+  <div card-image>
+    <div style="width: 40% !important; height: 100%; display: inline-block; padding: 8px">
+      <img border-radius [src]="data.image" alt="">
+      <span border-radius category text-uppercase>{{data.category}}</span>
+    </div>
+    <ion-card-content style="width: 60%; display: inline; float: left;position: absolute;
+    top: 25%">
+        <h4 text-wrap text-size-xs [innerHTML]=data.title style="display: inline-block; float: right;"></h4>
+        <div dataTime style="display: inline; float: right;">
+            <ion-chip>
+              <ion-icon icon name="ios-stopwatch"></ion-icon>
+              <ion-label text-size-p >{{data.time | date:'d MMMM yyyy'}}</ion-label>
+            </ion-chip>
+        </div>
+      </ion-card-content>
+      
+  </div>
+  
+</ion-card>

@@ -10,14 +10,14 @@ import { NavigationExtras, ActivatedRoute } from '@angular/router';
   providers: [CommentService]
 })
 export class CommentsPage {
-  comments:Array<any>;
-  post:any;
+  comments: Array<any>;
+  post: any;
   commentPageLoaded = 1;
-    
+
   constructor(public navCtrl: NavController,
     private route: ActivatedRoute,
-    private commentService:CommentService) {
-      let self = this;
+    private commentService: CommentService) {
+      const self = this;
       this.route.queryParams.subscribe(params => {
         self.post = JSON.parse(params['item']);
         self.onCompleteEvent(this.post.comments);
@@ -26,7 +26,7 @@ export class CommentsPage {
   }
 
   openComment(event) {
-    if(event) {
+    if (event) {
       event.stopPropagation();
     }
     const navigationExtras: NavigationExtras = {
@@ -35,20 +35,20 @@ export class CommentsPage {
     this.navCtrl.navigateForward(['/form-page'], navigationExtras);
   }
 
-  onCompleteEvent(comments:Array<any>) {
-    this.comments = comments ? comments: [];
+  onCompleteEvent(comments: Array<any>) {
+    this.comments = comments ? comments : [];
     this.comments.forEach(element => element.avatar = element.author_avatar_urls['96']);
   }
 
   doRefresh(event) {
     this.commentService
         .getAllCommentsForPostById(this.post.id, this.commentPageLoaded++)
-        .subscribe((comments:Array<any>) => {
+        .subscribe((comments: Array<any>) => {
           this.onCompleteEvent(comments);
           if (event) {
             event.target.complete();
           }
-        }, err=> {
+        }, err => {
           if (event) {
             event.target.complete();
           }

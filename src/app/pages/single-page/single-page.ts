@@ -20,7 +20,7 @@ export class SinglePage {
   numberOfComment: Number = 0;
   post: any;
   htmlContent: any;
-  htmlTitle:any;
+  htmlTitle: any;
   @ViewChild(IonContent) content: IonContent;
 
   constructor(public navCtrl: NavController,
@@ -31,11 +31,11 @@ export class SinglePage {
     private commentService: CommentService,
     private socialSharing: SocialSharing,
     private bookmarkService: BookmarkService) {
-    let self = this;
+    const self = this;
     this.route.queryParams.subscribe(params => {
       self.post = JSON.parse(params['item']);
       if (self.post && self.post.content) {
-        self.htmlContent = self.domSanitizer.bypassSecurityTrustHtml(self.post.content)
+        self.htmlContent = self.domSanitizer.bypassSecurityTrustHtml(self.post.content);
       }
 
       if (this.post && this.post.title) {
@@ -56,20 +56,22 @@ export class SinglePage {
   incrementPostCounter() {
     let counter = 0;
     if (localStorage.getItem('post-counter')) {
+      // tslint:disable-next-line:radix
       counter = parseInt(localStorage.getItem('post-counter'));
     }
     counter++;
-    localStorage.setItem('post-counter', counter + "");
+    localStorage.setItem('post-counter', counter + '');
   }
 
   showAdsAfterXPosts() {
     let counter = 0;
     if (localStorage.getItem('post-counter')) {
+      // tslint:disable-next-line: radix
       counter = parseInt(localStorage.getItem('post-counter'));
     }
     if (ConfigData.interstitialAds.showAdsAfterXPosts <= counter) {
-      this.showInterstitialAds()
-      localStorage.setItem('post-counter', "0");
+      this.showInterstitialAds();
+      localStorage.setItem('post-counter', '0');
     }
   }
 
@@ -106,15 +108,15 @@ export class SinglePage {
   }
 
   setClassActive(newValue) {
-    if (this.active != newValue) {
+    if (this.active !== newValue) {
       this._ngZone.run(() => {
         this.active = newValue;
       });
     }
   }
 
-  share= (item, e) => {
-    this.socialSharing.shareViaFacebook(item.title, "", item.link)
+  share = (item, e) => {
+    this.socialSharing.shareViaFacebook(item.title, '', item.link)
     .then(() => {
 
     }).catch(() => {
@@ -136,7 +138,7 @@ export class SinglePage {
   }
 
   onItemClick(item) {
-    this.content.scrollToTop(200)
+    this.content.scrollToTop(200);
   }
 
   ionViewDidLeave() {

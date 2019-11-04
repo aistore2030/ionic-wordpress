@@ -1,6 +1,9 @@
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
 
+$font-path: "../assets/font";
+
+
 /** Ionic CSS Variables **/
 :root {
 
@@ -40,6 +43,34 @@
 .header-md:after,
 .footer-md:before {
   background-image: none !important;
+}
+
+// Grid Fixed
+
+@font-face {
+  font-family: "Noto Kufi Arabic";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../assets/font/notokufiarabic-regular-webfont.eot");
+  src: url("../assets/font/notokufiarabic-regular-webfont.eot?#iefix") format("embedded-opentype"),
+    url("../assets/font/notokufiarabic-regular-webfont.woff2") format("woff2"),
+    url("../assets/font/notokufiarabic-regular-webfont.woff") format("woff"),
+    url("../assets/font/notokufiarabic-regular-webfont.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Noto Kufi Arabic";
+  font-style: normal;
+  font-weight: 700;
+  src: url("../assets/font/notokufiarabic-bold-webfont.eot");
+  src: url("../assets/font/notokufiarabic-bold-webfont.eot?#iefix") format("embedded-opentype"),
+    url("../assets/font/notokufiarabic-bold-webfont.woff2") format("woff2"),
+    url("../assets/font/notokufiarabic-bold-webfont.woff") format("woff"),
+    url("../assets/font/notokufiarabic-bold-webfont.ttf") format("truetype");
+}
+
+* {
+  font-family: "Noto Kufi Arabic", sans-serif;
+  font-size: 13px;
 }
 
 /* INCLUDE FONTS
@@ -263,4 +294,9 @@ img {
 
 ion-card-content.ion-no-padding.md.card-content-md.hydrated {
     color: black;
+}
+
+.sc-ion-buttons-md-s ion-icon[slot=icon-only] {
+  font-size: 2em;
+  margin: 10px;
 }

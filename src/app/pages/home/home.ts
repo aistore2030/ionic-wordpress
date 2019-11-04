@@ -22,7 +22,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class HomePage {
 
-  
+
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
   categories: any = [];
   posts: any = [];
@@ -45,41 +45,43 @@ export class HomePage {
     private postService: PostService,
     private mediaService: MediaService,
     private bookmarkService: BookmarkService) {
-      
+
       this.postPageLoaded = 1;
       this.showBannerAds();
 
       this.syncService.sync().subscribe(data => {
         this.categoryService.getCategories(1).subscribe((data: Array<any>) => {
           if (!data) {
-            return
+            return;
           }
           this.categories = data.filter(item => {
-            if (item.count == 0) return false
-            if (!ConfigData.enableExcludeFromMenu) return true
-            return ConfigData.excludeFromMenu[item.name.toLocaleLowerCase()]
+            if (item.count === 0) { return false; }
+            if (!ConfigData.enableExcludeFromMenu) { return true; }
+            return ConfigData.excludeFromMenu[item.id];
           });
-          if (this.categories && this.categories.length > 0) {
-            this.refreshData(this.categories[0])
+          this.categories.unshift({id: -1, name: 'الرئيسية'});
+          if (this.categories.length > 0) {
+              this.refreshData(this.categories[0]);
           }
         });
       });
   }
-  ngOnInit(){
+  // tslint:disable-next-line:use-life-cycle-interface
+  ngOnInit() {
     this.setFilteredPosts();
   }
 
-  setFilteredPosts(){
+  setFilteredPosts() {
     this.filteredNews = [];
-    for(let i = 0; i < this.postsRecentNews.length; i++){
-      var myrecentPosts = JSON.stringify(this.postsRecentNews[i]);
+    for (let i = 0; i < this.postsRecentNews.length; i++) {
+      const myrecentPosts = JSON.stringify(this.postsRecentNews[i]);
       if (this.searchTerm.length > 0) {
-        if (myrecentPosts.indexOf(this.searchTerm) != -1){
-        
+        if (myrecentPosts.indexOf(this.searchTerm) !== -1) {
+
           this.filteredNews.push(this.postsRecentNews[i]);
-          console.log("newRecentPosts", this.filteredNews);
+          console.log('newRecentPosts', this.filteredNews);
         }
-      }else{
+      } else {
         this.filteredNews = this.postsRecentNews;
       }
     }
@@ -96,33 +98,34 @@ export class HomePage {
 
   getHtmlTitle(title) {
     if (title) {
-      return this.domSanitizer.bypassSecurityTrustHtml(title)
+      return this.domSanitizer.bypassSecurityTrustHtml(title);
     }
   }
-  
+
   refreshData(category) {
     this.selectedItem = category.name;
     this.selectedCategory = category;
     this.postsRecentNews = [];
     this.posts = [];
     this.postPageLoaded = 1;
-    this.loadData(category.id, null);
+    this.loadData(category, null);
   }
 
-  loadData(categoryId, event) {
-    this.postService.getPostListWithFilter(categoryId, this.postPageLoaded++).subscribe((data: Array<any>) => {
+  loadData(category, event) {
+    this.postService.getPostListWithFilter(category.id !== -1 ? category.id : null, this.postPageLoaded++)
+    .subscribe((data: Array<any>) => {
       // console.log("postService", this.postService);
-      if (this.posts && this.posts.length == 0) {
+      if (this.posts && this.posts.length === 0) {
         this.posts = data.slice(0, 3);
         if (data.length > 3) {
             this.postsRecentNews = this.postsRecentNews.concat(data.slice(3, data.length));
             this.filteredNews = this.postsRecentNews;
-            console.log("postsRecentNews1", this.postsRecentNews);
+            console.log('postsRecentNews1', this.postsRecentNews);
         }
       } else {
         this.postsRecentNews = this.postsRecentNews.concat(data);
         this.filteredNews = this.postsRecentNews;
-        console.log("postsRecentNews2", this.postsRecentNews);
+        console.log('postsRecentNews2', this.postsRecentNews);
       }
 
       if (event) {
@@ -130,7 +133,7 @@ export class HomePage {
       }
 
       this.posts.forEach(element => {
-        element.bookmark = this.bookmarkService[element.id] ? true : false
+        element.bookmark = this.bookmarkService[element.id] ? true : false;
         if (element.mediaId) {
           this.mediaService.getItemById(element.mediaId).subscribe(media => {
             this.posts.forEach(element => {
@@ -143,7 +146,7 @@ export class HomePage {
       });
 
       this.postsRecentNews.forEach(element => {
-        element.bookmark = this.bookmarkService[element.id] ? true : false
+        element.bookmark = this.bookmarkService[element.id] ? true : false;
         if (element.mediaId) {
           this.mediaService.getItemById(element.mediaId).subscribe(media => {
             this.postsRecentNews.forEach(element => {
@@ -154,10 +157,10 @@ export class HomePage {
           });
         }
       });
-    })
+    });
   }
 
-  
+
 
   doInfinite(event) {
     this.loadData(this.selectedCategory.id, event);
@@ -183,7 +186,7 @@ export class HomePage {
     }
   }
 
-  onClickSearch() { 
+  onClickSearch() {
     this.isShowSearchBar = !this.isShowSearchBar;
   }
 

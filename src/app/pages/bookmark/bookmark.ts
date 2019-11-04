@@ -10,7 +10,7 @@ import { BookmarkService } from '../../services/bookmark.service';
 })
 export class BookmarkPage {
   posts: any = [];
-  title: any = "Bookmark";
+  title: any = 'Bookmark';
 
   searchTerm: string;
   filteredNews: any = [];
@@ -23,21 +23,21 @@ export class BookmarkPage {
     this.loadBookmarks();
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.setFilteredBookmark();
   }
 
-  setFilteredBookmark(){
+  setFilteredBookmark() {
     this.filteredNews = [];
-    for(let i = 0; i < this.posts.length; i++){
-      var myrecentPosts = JSON.stringify(this.posts[i]);
+    for (let i = 0; i < this.posts.length; i++) {
+      const myrecentPosts = JSON.stringify(this.posts[i]);
       if (this.searchTerm.length > 0) {
-        if (myrecentPosts.indexOf(this.searchTerm) != -1){
-        
+        if (myrecentPosts.indexOf(this.searchTerm) !== -1) {
+
           this.filteredNews.push(this.posts[i]);
-          console.log("newRecentPosts", this.filteredNews);
+          console.log('newRecentPosts', this.filteredNews);
         }
-      }else{
+      } else {
         this.filteredNews = this.posts;
       }
     }
@@ -45,21 +45,21 @@ export class BookmarkPage {
   }
 
   loadBookmarks() {
-    let bookmarks = this.bookmarkService.getAllBookmark();
+    const bookmarks = this.bookmarkService.getAllBookmark();
     this.posts = [];
-    for (let item in bookmarks) {
+    for (const item in bookmarks) {
       this.posts.push(bookmarks[item]);
-      console.log("bookmark", this.posts);
+      console.log('bookmark', this.posts);
     }
     this.filteredNews = this.posts;
-    console.log("bookmark", this.posts);
+    console.log('bookmark', this.posts);
   }
 
   clearAll() {
     this.bookmarkService.clearAll();
     this.loadBookmarks();
   }
-  
+
   ionViewWillEnter() {
     this.loadBookmarks();
   }
@@ -68,7 +68,7 @@ export class BookmarkPage {
       this.bookmarkService.delete(item);
       this.loadBookmarks();
   }
-  onClickSearch() { 
+  onClickSearch() {
     this.isShowSearchBar = !this.isShowSearchBar;
   }
 }

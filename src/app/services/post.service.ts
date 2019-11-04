@@ -10,24 +10,24 @@ export class PostService extends Service {
     super(http, 'posts');
   }
 
-  getPostListWithFilter(categoryId, page=null) {
+  getPostListWithFilter(categoryId, page= null) {
     return new Observable(observer => {
-      let categories = JSON.parse(localStorage.getItem("category"));
-      let posts = [];
-      let query = categoryId ? `categories=${categoryId}` : null;
-      let itemListRequest = page ? this.getItemList(query, null, null, page, 10) : this.getItemList(query);
+      const categories = JSON.parse(localStorage.getItem('category'));
+      const posts = [];
+      const query = categoryId ? `categories=${categoryId}` : null;
+      const itemListRequest = page ? this.getItemList(query, null, null, page, 10) : this.getItemList(query);
       itemListRequest.subscribe((data: Array<any>) => {
         data.forEach(element => {
           posts.push({
-            "category": categories[element.categories[0]] ? categories[element.categories[0]].name : "",
-            "categoryId": element.categories[0],
-            "title": element.title.rendered,
-            "time": element.date,
-            "image": "",
-            "id": element.id,
-            "link": element.link,
-            "content": element.content.rendered,
-            "mediaId": element.featured_media
+            'category': categories[element.categories[0]] ? categories[element.categories[0]].name : '',
+            'categoryId': element.categories[0],
+            'title': element.title.rendered,
+            'time': element.date,
+            'image': '',
+            'id': element.id,
+            'link': element.link,
+            'content': element.content.rendered,
+            'mediaId': element.featured_media
           });
         });
         observer.next(posts);
@@ -39,6 +39,6 @@ export class PostService extends Service {
         observer.next(posts);
         observer.complete();
       });
-    })
-  };
+    });
+  }
 }

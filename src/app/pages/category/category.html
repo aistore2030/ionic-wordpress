@@ -1,28 +1,27 @@
 <!-- Header -->
-<ion-header box-shadow>
+<ion-header box-shadow mode="md">
   <ion-toolbar>
-      <ion-buttons slot="end">
-          <ion-icon slot="icon-only" name="search" (click)="onClickSearch()"></ion-icon>
+      <ion-buttons slot="end" (click)="onClickSearch()">
+          <ion-icon slot="icon-only" name="search"></ion-icon>
       </ion-buttons>
-      <!-- <ion-title text-uppercase>DECO NEWS</ion-title> -->
-      <img src="../assets/imgs/decoLogo.png" alt="" style="width:30px; height:25px; display: block; margin: 0 auto;"/>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/"></ion-back-button>
+      <ion-title>الأقسام</ion-title>
+    <ion-buttons slot="start" mode="md">
+      <ion-menu-button mode="md" defaultHref="/"></ion-menu-button>
     </ion-buttons>
-    <!-- <ion-title text-uppercase>الداعي نيوز</ion-title> -->
   </ion-toolbar>
+  <ion-toolbar>
 </ion-header>
 <!-- Content -->
 <ion-content>
-  <ion-searchbar *ngIf="isShowSearchBar" [(ngModel)]="searchTerm" (ionChange)="setFilteredCategories()" placeholder="بحث"></ion-searchbar> 
+  <ion-searchbar mode="md" *ngIf="isShowSearchBar" [(ngModel)]="searchTerm" (ionChange)="setFilteredCategories()" placeholder="بحث"></ion-searchbar> 
   <!-- <ion-searchbar placeholder="بحث"></ion-searchbar>  -->
   <ion-grid no-padding>
     <ion-row>
       <!--- Category List -->
-      <ion-col size="12" size-md="4" *ngFor="let item of filteredNews" (click)="openCategory(item)">
+      <ion-col size="6" size-md="6" *ngFor="let item of filteredNews" (click)="openCategory(item)">
         <ion-card box-shadow text-center padding>
             <h2 text-size-md text-capitalize>{{item.name}}</h2>
-            <h3 text-size-xs margin-top text-capitalize>{{item.count}} Posts</h3>
+            <h3 text-size-xs margin-top text-capitalize> عدد الأخبار: {{item.count}}</h3>
         </ion-card>
       </ion-col>
     </ion-row>
@@ -31,7 +30,7 @@
   <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content
       loadingSpinner="bubbles"
-      loadingText="Loading more data...">
+      loadingText="جاري التحميل ...">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>

@@ -4,16 +4,16 @@ import { Service } from './service';
 
 @Injectable({ providedIn: 'root' })
 export class CommentService extends Service {
-    constructor(public http: HttpClient) { 
+    constructor(public http: HttpClient) {
         super(http, 'comments');
     }
     getAllCommentsForPostById(postId, page) {
-        return this.getItemList(`post=${postId}`, null, null, page, 10)
+        return this.getItemList(`post=${postId}`, null, null, page, 10);
     }
 
-    addComment(postId, content, author, email, url="") {
-        let body = {}
-  
+    addComment(postId, content, author, email, url= '') {
+        const body = {};
+
         if (postId) {
             body['post'] =  postId;
         }

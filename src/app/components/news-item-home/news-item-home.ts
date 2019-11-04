@@ -8,7 +8,7 @@ import { NavigationExtras } from '@angular/router';
   selector: 'news-item-home',
   templateUrl: 'news-item-home.html',
   styleUrls: ['news-item-home.scss'],
-  providers:[BookmarkService]
+  providers: [BookmarkService]
 })
 
 export class NewsItemHomePage {

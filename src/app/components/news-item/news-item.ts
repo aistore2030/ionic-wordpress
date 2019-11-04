@@ -7,14 +7,14 @@ import { NavigationExtras } from '@angular/router';
   selector: 'news-item',
   templateUrl: 'news-item.html',
   styleUrls: ['news-item.scss'],
-  providers:[BookmarkService]
+  providers: [BookmarkService]
 })
 
 export class NewsItemPage implements OnChanges {
   @Input('data') data: any;
   @Output() onBookmark = new EventEmitter();
   @Output() onItemClick = new EventEmitter();
-  
+
   constructor(private navCtrl: NavController, private bookmarkService: BookmarkService) {}
 
   ngOnChanges(changes: { [propKey: string]: any }) {

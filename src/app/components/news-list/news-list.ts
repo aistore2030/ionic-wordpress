@@ -14,10 +14,10 @@ export class NewsListPage {
   @Input('title') title: any;
   @Input('postId') postId: any;
   @Output() onItemClick = new EventEmitter();
-  
+
   posts: any = [];
   events: any = {};
-  bookmarks:any = {};
+  bookmarks: any = {};
   postPageLoaded = 1;
 
   constructor(
@@ -27,6 +27,7 @@ export class NewsListPage {
       this.bookmarks = this.bookmarkService.getAllBookmark();
     }
 
+  // tslint:disable-next-line: use-life-cycle-interface
   ngOnChanges() {
     this.loadData(this.categoryId, null);
   }
@@ -41,17 +42,17 @@ export class NewsListPage {
 
   loadData(categoryId, event) {
     this.postService.getPostListWithFilter(categoryId, this.postPageLoaded++).subscribe((data: Array<any>) => {
-      console.log("postService");
-      let newData = this.postId ? data.filter(it => it.id != this.postId) : data
+      console.log('postService');
+      const newData = this.postId ? data.filter(it => it.id !== this.postId) : data;
       this.posts = this.posts.concat(newData);
 
       if (event) {
-        console.log("event");
+        console.log('event');
         event.target.complete();
       }
 
       newData.forEach(element => {
-        element.bookmark = this.bookmarks[element.id] ? true : false
+        element.bookmark = this.bookmarks[element.id] ? true : false;
         if (element.mediaId) {
           this.mediaService.getItemById(element.mediaId).subscribe(media => {
             this.posts.forEach(element => {
@@ -59,22 +60,22 @@ export class NewsListPage {
                 element.image = media['source_url'];
               }
             });
-          })
+          });
         }
       });
     },
-    err =>{
-      console.log("err");
+    err => {
+      console.log('err');
       if (event) {
         event.target.complete();
       }
-    }, ()=>{
-      console.log("done");
+    }, () => {
+      console.log('done');
       if (event) {
         event.target.complete();
       }
     }
-  )
+  );
 
   }
 

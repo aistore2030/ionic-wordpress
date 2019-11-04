@@ -17,7 +17,7 @@ export class AboutPage {
   constructor(public navCtrl: NavController, private aboutService: AboutService) {
     this.about = this.aboutService.getAboutInformation();
   }
-  onClickSearch() { 
+  onClickSearch() {
     this.isShowSearchBar = !this.isShowSearchBar;
   }
 }

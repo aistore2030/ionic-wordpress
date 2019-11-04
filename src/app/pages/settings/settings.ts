@@ -13,34 +13,34 @@ export class SettingsPage {
 
   themes = {
     autumn: {
-      primary: "#ffffff",
-      secondary: "#fafafa",
-      danger: "#f53d3d",
-      light: "#1b1e28",
-      sliderColor: "#fff",
-      colorIcon: "#CCCBDA",
-      colorIconText: "#7F7E96",
-      category: "#fff",
-      listBackgroundColor: "#ffffff",
-      backgroundColor: "#fafafa",
-      toobarBackground: "#ffffff",
-      toobarButton: "#AAB2B7",
-      toobarText: "#FFFFFF"
+      primary: '#ffffff',
+      secondary: '#fafafa',
+      danger: '#f53d3d',
+      light: '#1b1e28',
+      sliderColor: '#fff',
+      colorIcon: '#CCCBDA',
+      colorIconText: '#7F7E96',
+      category: '#fff',
+      listBackgroundColor: '#ffffff',
+      backgroundColor: '#fafafa',
+      toobarBackground: '#ffffff',
+      toobarButton: '#AAB2B7',
+      toobarText: '#FFFFFF'
     },
     night: {
-       primary: "#282C39",
-       secondary: "#1b1e28",
-       danger: "#f53d3d",
-       sliderColor: "#ffffff",
-       light: "#ffffff",
-       colorIcon: "#7F7E96",
-       colorIconText: "#7F7E96",
-       category: "#ffffff",
-       listBackgroundColor: "#1B1E28",
-       backgroundColor: "#282C39",
-       toobarBackground: "#1B1E28",
-       toobarButton: "#D8D8D8",
-       toobarText: "#FFFFFF",
+       primary: '#282C39',
+       secondary: '#1b1e28',
+       danger: '#f53d3d',
+       sliderColor: '#ffffff',
+       light: '#ffffff',
+       colorIcon: '#7F7E96',
+       colorIconText: '#7F7E96',
+       category: '#ffffff',
+       listBackgroundColor: '#1B1E28',
+       backgroundColor: '#282C39',
+       toobarBackground: '#1B1E28',
+       toobarButton: '#D8D8D8',
+       toobarText: '#FFFFFF',
     }
   };
 
@@ -49,33 +49,33 @@ export class SettingsPage {
 
   isShowSearchBar = false;
 
-  isLightColorSelected:Boolean = true;
-  isPushNotificationEnabled:boolean = false;
-  isRTLEnabled:Boolean = true;
+  isLightColorSelected: Boolean = true;
+  isPushNotificationEnabled = false;
+  isRTLEnabled: Boolean = true;
 
-  constructor(private oneSignal: OneSignal, private file:File, private theme: ThemeService) {
-    this.isPushNotificationEnabled = localStorage.getItem('isPushNotificationEnabled') == "true";
-    this.isLightColorSelected = localStorage.getItem('isLightColorSelected') == "true";
-    this.isRTLEnabled = localStorage.getItem('isRTLEnabled') == "true";
+  constructor(private oneSignal: OneSignal, private file: File, private theme: ThemeService) {
+    this.isPushNotificationEnabled = localStorage.getItem('isPushNotificationEnabled') === 'true';
+    this.isLightColorSelected = localStorage.getItem('isLightColorSelected') === 'true';
+    this.isRTLEnabled = localStorage.getItem('isRTLEnabled') === 'true';
   }
 
   changeTheme(name) {
     this.theme.setTheme(this.themes[name]);
   }
 
-  ionChangeSelectedTheme(e){
-    localStorage.setItem('isLightColorSelected', this.isLightColorSelected + "");
+  ionChangeSelectedTheme(e) {
+    localStorage.setItem('isLightColorSelected', this.isLightColorSelected + '');
     this.writeToFile();
-    let theme = this.isLightColorSelected ? "colorLight" : "colorDark";
-    document.getElementsByTagName("body")[0].setAttribute("class", theme);
+    const theme = this.isLightColorSelected ? 'colorLight' : 'colorDark';
+    document.getElementsByTagName('body')[0].setAttribute('class', theme);
   }
 
-  //Enable/Disable push notification OneSignal
-  ionChange(e){
+  // Enable/Disable push notification OneSignal
+  ionChange(e) {
     this.oneSignal.setSubscription(this.isPushNotificationEnabled);
-    localStorage.setItem('isPushNotificationEnabled', "" + this.isPushNotificationEnabled);
+    localStorage.setItem('isPushNotificationEnabled', '' + this.isPushNotificationEnabled);
     this.writeToFile();
-    if(this.isPushNotificationEnabled) {
+    if (this.isPushNotificationEnabled) {
       this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification);
     } else {
       this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.None);
@@ -83,18 +83,18 @@ export class SettingsPage {
     this.oneSignal.endInit();
   }
 
-  ionChangeRTL(e){
-      localStorage.setItem('isRTLEnabled', "" + this.isRTLEnabled)
+  ionChangeRTL(e) {
+      localStorage.setItem('isRTLEnabled', '' + this.isRTLEnabled);
       document.getElementsByTagName('ion-menu')[0]
-              .setAttribute('side', this.isRTLEnabled  ? 'end': 'start');
+              .setAttribute('side', this.isRTLEnabled  ? 'end' : 'start');
       document.getElementsByTagName('html')[0]
-              .setAttribute('dir', this.isRTLEnabled  ? 'rtl': 'ltr');
-              console.log("Here", this.isRTLEnabled)
-              console.log("Here", localStorage.setItem('isRTLEnabled', "" + this.isRTLEnabled))
+              .setAttribute('dir', this.isRTLEnabled  ? 'rtl' : 'ltr');
+              console.log('Here', this.isRTLEnabled);
+              console.log('Here', localStorage.setItem('isRTLEnabled', '' + this.isRTLEnabled));
   }
 
   getSettingsObject() {
-    let result = {
+    const result = {
         'bookmark': localStorage.getItem('bookmark'),
         'isPushNotificationEnabled': localStorage.getItem('isPushNotificationEnabled'),
         'isLightColorSelected': localStorage.getItem('isLightColorSelected'),
@@ -110,7 +110,7 @@ export class SettingsPage {
   readFromFile() {
       return this.file.readAsText(this.file.externalRootDirectory, 'settings.json');
   }
-  onClickSearch() { 
+  onClickSearch() {
     this.isShowSearchBar = !this.isShowSearchBar;
   }
 }

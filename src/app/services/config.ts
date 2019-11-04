@@ -3,20 +3,40 @@ export const ConfigData = {
   'rootUrl': 'http://ramlaonline.com/wp-json/wp/v2/',
 
   // DEFAULT VALUE IS FALSE, SHOW ALL YOUR CATEGORIES
-  'enableExcludeFromMenu': false,
+  'enableExcludeFromMenu': true,
 
   // enableExcludeFromMenu SET TO true TO ENABLE excudeFromMenu
   // if want to exclude from menu your category set value FALSE
   // all category enter with lower case
   'excludeFromMenu': {
-    'travel': true,
-    'architecture': true,
-    'current events': true,
+    // name: "أخبار رياضية"
+    21: true,
+    // name: "أخبار عالمية"
+    15: true,
+    // name: "أخبار محلية"
+    2: true,
+    // name: "أخبار هامة"
+    29: false,
+    // name: "إعرف بلدك"
+    20: true,
+    // name: "الصحة والمنزل"
+    9: true,
+    // name: "المرئيات"
+    27: true,
+    // name: "تقارير"
+    17: true,
+    // name: "توعية وترفيه"
+    18: true,
+    // name: "مقالات"
+    1: true,
+    // name: "وفيات"
+    24: true,
+
   },
 
   'oneSignal': {
-    'appID': '94ca9005-8bfe-1234-5678-d9b74be573f4',
-    'googleProjectId': '123456789012'
+    'appID': 'b5f0bd50-c4ed-44f2-89ad-cb7a1efbdda4',
+    'googleProjectId': '708359667620'
   },
 
   // ADS

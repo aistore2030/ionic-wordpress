@@ -10,53 +10,53 @@ export abstract class Service {
     }
 
     getItemList(filter = null, orderBy = null, order = null, page = null, perPage = null) {
-        let query = "";
-        let filterData = filter ? filter : "";
-        let orderByData = orderBy ? `orderby=${orderBy}` : "";
-        let orderData = order ? `order=${order}` : "";
+        let query = '';
+        const filterData = filter ? filter : '';
+        const orderByData = orderBy ? `orderby=${orderBy}` : '';
+        const orderData = order ? `order=${order}` : '';
 
         if (filterData) {
-            query += `?${filterData}`
+            query += `?${filterData}`;
         }
 
         if (orderByData) {
             if (query) {
-                query += `&${filterData}`
+                query += `&${filterData}`;
             } else {
-                query += `?${filterData}`
+                query += `?${filterData}`;
             }
         }
 
         if (orderData) {
             if (query) {
-                query += `&${order}`
+                query += `&${order}`;
             } else {
-                query += `?${order}`
+                query += `?${order}`;
             }
         }
 
         if (page) {
             if (query) {
-                query += `&page=${page}`
+                query += `&page=${page}`;
             } else {
-                query += `?page=${page}`
+                query += `?page=${page}`;
             }
         }
 
         if (perPage) {
             if (query) {
-                query += `&per_page=${perPage}`
+                query += `&per_page=${perPage}`;
             } else {
-                query += `?per_page=${perPage}`
+                query += `?per_page=${perPage}`;
             }
         }
 
         if (query) {
-            query += `&timestepm=${new Date().getTime()}`
+            query += `&timestepm=${new Date().getTime()}`;
         } else {
-            query += `?timestepm=${new Date().getTime()}`
+            query += `?timestepm=${new Date().getTime()}`;
         }
-        let  url = `${this.getRootUrl()}${query}`;
+        const  url = `${this.getRootUrl()}${query}`;
         console.log(url);
         return this.http.get(url);
     }

@@ -11,24 +11,24 @@ export class SyncService {
     return new Observable(observer => {
       this.userService.getItemList().subscribe((items: Array<any>) => {
         if (!items) {
-          return
+          return;
         }
-        let storeItem = {};
+        const storeItem = {};
         items.forEach(element => {
           storeItem[element.id] = element;
         });
-        localStorage.setItem('users', JSON.stringify(storeItem))
-      })
+        localStorage.setItem('users', JSON.stringify(storeItem));
+      });
 
       this.categoryService.getCategories(1).subscribe((items: Array<any>) => {
-        let storeItem = {};
+        const storeItem = {};
         if (!items) {
-          return
+          return;
         }
         items.forEach(element => {
           storeItem[element.id] = element;
         });
-        localStorage.setItem('category', JSON.stringify(storeItem))
+        localStorage.setItem('category', JSON.stringify(storeItem));
         observer.next(storeItem);
         observer.complete();
       });

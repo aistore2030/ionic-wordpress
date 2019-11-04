@@ -9,19 +9,19 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class RecentNewsPage {
   title: any;
-  categoryId:any;
+  categoryId: any;
   searchTerm: string;
   filteredNews: any = [];
 
   isShowSearchBar = false;
 
   constructor(public navCtrl: NavController, private route: ActivatedRoute) {
-      let self = this;
+      const self = this;
       this.route.queryParams.subscribe(params => {
           self.categoryId = JSON.parse(params['id']);
       });
   }
-  onClickSearch() { 
+  onClickSearch() {
     this.isShowSearchBar = !this.isShowSearchBar;
   }
 }

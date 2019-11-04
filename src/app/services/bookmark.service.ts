@@ -3,7 +3,7 @@ import { File } from '@ionic-native/file/ngx';
 
 @Injectable({ providedIn: 'root' })
 export class BookmarkService {
-    constructor(private file:File) {}
+    constructor(private file: File) {}
 
     save(post) {
         if (!post) {
@@ -13,17 +13,17 @@ export class BookmarkService {
             return;
         }
 
-        let bookmarkList = this.getAllBookmark();
+        const bookmarkList = this.getAllBookmark();
         if (bookmarkList[post.id]) {
             return;
         } else {
             bookmarkList[post.id] = post;
             localStorage.setItem('bookmark', JSON.stringify(bookmarkList));
         }
-    }   
-    
+    }
+
     clearAll() {
-        localStorage.removeItem("bookmark");
+        localStorage.removeItem('bookmark');
     }
 
     delete(post) {
@@ -33,15 +33,15 @@ export class BookmarkService {
         if (!post.id) {
             return;
         }
-        let bookmarkList = this.getAllBookmark();
+        const bookmarkList = this.getAllBookmark();
         if (bookmarkList[post.id]) {
-            delete bookmarkList[post.id]
+            delete bookmarkList[post.id];
             localStorage.setItem('bookmark', JSON.stringify(bookmarkList));
         }
     }
 
     getAllBookmark() {
-        let bookmarkListString = localStorage.getItem('bookmark');
+        const bookmarkListString = localStorage.getItem('bookmark');
         if (!bookmarkListString) {
             return {};
         } else {
@@ -50,10 +50,10 @@ export class BookmarkService {
     }
 
     getSettingsObject() {
-        let result =  {
+        const result =  {
             'bookmark': localStorage.getItem('bookmark'),
             'isPushNotificationEnabled': localStorage.getItem('isPushNotificationEnabled'),
-            'isLightColorSelected': localStorage.getItem('isLightColorSelected')       
+            'isLightColorSelected': localStorage.getItem('isLightColorSelected')
         };
         return JSON.stringify(result);
     }

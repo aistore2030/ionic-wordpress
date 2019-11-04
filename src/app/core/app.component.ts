@@ -67,18 +67,8 @@ export class AppComponent {
       //     self.defaultLoad();
       //   }
       // });
-      self.setLocalStorage();
       self.defaultLoad();
     });
-  }
-
-  setLocalStorage() {
-    localStorage.setItem('isRTLEnabled', 'true');
-    document.getElementsByTagName('ion-menu')[0]
-            .setAttribute('side', 'end');
-    document.getElementsByTagName('html')[0]
-            .setAttribute('dir', 'rtl');
-            console.log('Here', true);
   }
 
   resetData(data) {
@@ -105,12 +95,10 @@ export class AppComponent {
 
 
   defaultLoad() {
-    if (localStorage.getItem('isRTLEnabled') === 'true') {
+
       document.getElementsByTagName('ion-menu')[0].setAttribute('side', 'end');
       document.getElementsByTagName('html')[0].setAttribute('dir', 'rtl');
-      this.platform.setDir('rtl', true);
-      this.platform.setLang('ar', true);
-    }
+
     if (!localStorage.getItem('isLightColorSelected')) {
       localStorage.setItem('isLightColorSelected', 'true');
     } else {
@@ -123,7 +111,7 @@ export class AppComponent {
     this.statusBar.styleDefault();
     this.splashScreen.hide();
 
-    
+
     if (ConfigData.oneSignal && ConfigData.oneSignal.appID && ConfigData.oneSignal.googleProjectId) {
         this.oneSignal.startInit(ConfigData.oneSignal.appID, ConfigData.oneSignal.googleProjectId);
         this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification);

@@ -1,70 +1,90 @@
 import { Injectable } from '@angular/core';
 import { File } from '@ionic-native/file/ngx';
+import { Storage } from '@ionic/storage';
 
 @Injectable({ providedIn: 'root' })
 export class BookmarkService {
-    constructor(private file: File) {}
+  constructor(private file: File,
+    private storage: Storage) { }
 
-    save(post) {
-        if (!post) {
-            return;
-        }
-        if (!post.id) {
-            return;
-        }
-
-        const bookmarkList = this.getAllBookmark();
-        if (bookmarkList[post.id]) {
-            return;
-        } else {
-            bookmarkList[post.id] = post;
-            localStorage.setItem('bookmark', JSON.stringify(bookmarkList));
-        }
+  save(post) {
+    if (!post) {
+      return;
+    }
+    if (!post.id) {
+      return;
     }
 
-    clearAll() {
-        localStorage.removeItem('bookmark');
+    this.getAllBookmark().then(t => {
+      const bookmarkList = t;
+      if (bookmarkList[post.id]) {
+        return;
+      } else {
+        bookmarkList[post.id] = post;
+        this.storage.set('bookmark', JSON.stringify(bookmarkList));
+      }
+    });
+  }
+
+  clearAll() {
+    this.storage.remove('bookmark');
+  }
+
+  delete(post) {
+    if (!post) {
+      return;
+    }
+    if (!post.id) {
+      return;
+    }
+    this.getAllBookmark().then(t => {
+      const bookmarkList = t;
+      if (bookmarkList[post.id]) {
+        delete bookmarkList[post.id];
+        this.storage.set('bookmark', JSON.stringify(bookmarkList));
+      }
+    });
+
+  }
+
+  async getAllBookmark() {
+    const t = await this.storage.get('bookmark');
+    const bookmarkListString = t;
+    if (!bookmarkListString) {
+      return {};
+    } else {
+      return JSON.parse(bookmarkListString);
     }
 
-    delete(post) {
-        if (!post) {
-            return;
-        }
-        if (!post.id) {
-            return;
-        }
-        const bookmarkList = this.getAllBookmark();
-        if (bookmarkList[post.id]) {
-            delete bookmarkList[post.id];
-            localStorage.setItem('bookmark', JSON.stringify(bookmarkList));
-        }
-    }
+  }
 
-    getAllBookmark() {
-        const bookmarkListString = localStorage.getItem('bookmark');
-        if (!bookmarkListString) {
-            return {};
-        } else {
-            return JSON.parse(bookmarkListString);
-        }
-    }
+  getSettingsObject() {
+    // const result = {
+    //   bookmark: this.storage.getItem('bookmark'),
+    //   isPushNotificationEnabled: this.storage.getItem(
+    //     'isPushNotificationEnabled'
+    //   ),
+    //   isLightColorSelected: this.storage.getItem('isLightColorSelected')
+    // };
+    // return JSON.stringify(result);
+    return '{}';
+  }
 
-    getSettingsObject() {
-        const result =  {
-            'bookmark': localStorage.getItem('bookmark'),
-            'isPushNotificationEnabled': localStorage.getItem('isPushNotificationEnabled'),
-            'isLightColorSelected': localStorage.getItem('isLightColorSelected')
-        };
-        return JSON.stringify(result);
-    }
+  writeToFile() {
+    console.log('writeToFile');
+    this.file.writeFile(
+      this.file.applicationDirectory,
+      'settings.json',
+      this.getSettingsObject(),
+      { replace: true }
+    );
+  }
 
-    writeToFile() {
-        console.log('writeToFile');
-        this.file.writeFile(this.file.externalRootDirectory, 'settings.json', this.getSettingsObject(), {replace: true});
-    }
-
-    readFromFile() {
-        console.log('readFile');
-        return this.file.readAsText(this.file.externalRootDirectory, 'settings.json');
-    }
+  readFromFile() {
+    console.log('readFile');
+    return this.file.readAsText(
+      this.file.applicationDirectory,
+      'settings.json'
+    );
+  }
 }

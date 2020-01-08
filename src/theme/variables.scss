@@ -3,11 +3,9 @@
 
 $font-path: "../assets/font";
 
-
 /** Ionic CSS Variables **/
 :root {
-
-/* Settings Fonts Size And Icon Size
+  /* Settings Fonts Size And Icon Size
 =======================================================
 =======================================================*/
   --fallback-color: red;
@@ -19,7 +17,7 @@ $font-path: "../assets/font";
   --h6-font-size: 12px;
   --text-font-size: 14px;
 
-/* Settings Fonts Size Icon
+  /* Settings Fonts Size Icon
 =======================================================
 =======================================================*/
 
@@ -27,14 +25,13 @@ $font-path: "../assets/font";
   --icon--size-medium: 32px;
   --icon-size-large: 60px;
 
-/* Settings Font Span
+  /* Settings Font Span
 =======================================================
 =======================================================*/
 
   --span-size-small: 12px;
   --span-size-medium: 24px;
   --span-size-large: 30px;
-
 }
 
 /* SETTINGS TOOLBAR
@@ -70,7 +67,13 @@ $font-path: "../assets/font";
 
 * {
   font-family: "Noto Kufi Arabic", sans-serif;
-  font-size: 13px;
+}
+
+body {
+  -webkit-user-select: text !important;
+  -moz-user-select: text !important;
+  -ms-user-select: text !important;
+  user-select: text !important;
 }
 
 /* INCLUDE FONTS
@@ -84,32 +87,34 @@ $font-path: "../assets/font";
 =======================================================*/
 [text-size-xl] {
   font-size: var(--h1-font-size, 20px) !important;
-  color: var(--deco-light, #1b1e28);
+  color: var(--deco-light, #0f150e);
 }
 
 [text-size-lg] {
   font-size: var(--h2-font-size, 18px) !important;
-  color: var(--deco-light, #1b1e28);
+  color: var(--deco-light, #0f150e);
+  font-weight: 700;
 }
 
 [text-size-md] {
   font-size: var(--h3-font-size, 16px) !important;
-  color: var(--deco-light, #1b1e28);
+  color: var(--deco-light, #0f150e);
 }
 
 [text-size-xs] {
   font-size: var(--h4-font-size, 14px) !important;
-  color: var(--deco-light, #1b1e28);
+  color: var(--deco-light, #0f150e);
 }
 
 [text-size-sm] {
   font-size: var(--h5-font-size, 15px) !important;
-  color: var(--deco-light, #1b1e28);
+  color: var(--deco-light, #0f150e);
 }
 
 [text-size-p] {
-  font-size: var(--text-font-size, 14px) !important;
-  color: var(--deco-light, #1b1e28);
+  font-size: 9px !important;
+  color: var(--deco-light, #0f150e);
+  line-height: normal;
 }
 
 [text-nowrap] {
@@ -117,18 +122,18 @@ $font-path: "../assets/font";
   overflow: hidden;
 }
 
-page-home {
-  .swiper-pagination.swiper-pagination-bullets {
-    bottom: 5px !important;
+.swiper-pagination.swiper-pagination-bullets {
+  bottom: 0px !important;
 
-    .swiper-pagination-bullet-active {
-      --bullet-background: var(--deco-light, #1b1e28) !important;
-      background: var(--bullet-background);
-
-    }
+  .swiper-pagination-bullet-active {
+    --bullet-background: var(--deco-light, #fff) !important;
+    background: var(--bullet-background);
   }
 }
 
+.swiper-pagination-bullet {
+  background: #fff;
+}
 
 /* SETTINGS BUTTON
 =======================================================
@@ -136,7 +141,7 @@ page-home {
 [default-button] {
   --padding-top: 20px;
   --padding-bottom: 20px;
-  --background: var(--deco-light, #1b1e28);
+  --background: var(--deco-light, #0f150e);
   --color: var(--deco-primary, #ffffff);
   --ripple-color: transparent;
   border-radius: 4px;
@@ -144,7 +149,6 @@ page-home {
   min-height: 45px;
   text-transform: inherit;
 }
-
 
 /* SETTINGS CATEGORY
 =======================================================
@@ -176,16 +180,30 @@ ion-item {
   --background: var(--deco-backgroundColor, #ffffff);
 }
 
+:host-context(.can-go-back > ion-header),
+:host(.show-back-button) {
+  display: block;
+}
+
 ion-toolbar {
-  --background: var(--deco-toobarBackground, #ffffff);
-  --color: var(--deco-toobarButton, #AAB2B7);
+  --background: var(--deco-toobarBackground, #fff);
+  --color: var(--deco-toobarButton, #434955);
 
   ion-title {
-    --color: var(--deco-light, #1b1e28);
+    --color: var(--deco-light, #0f150e);
     font-size: 16px;
+    text-align: center;
+    margin-right: -50px;
   }
 }
 
+ion-menu-button {
+  font-size: 40px;
+  color: #434955;
+  img {
+    color: #434955;
+  }
+}
 
 /* SETTINGS CHIP
 =======================================================
@@ -203,10 +221,10 @@ ion-chip {
   }
 
   ion-icon {
-    color: var(--deco-colorIcon, #CCCBDA);
+    color: var(--deco-colorIcon, #cccbda);
   }
   ion-label {
-    color: var(--deco-colorIconText, #7F7E96) !important;
+    color: var(--deco-colorIconText, #7f7e96) !important;
   }
 }
 
@@ -217,15 +235,15 @@ ion-segment-button {
   --background: var(--deco-toobarBackground, #ffffff);
   --background-checked: var(--deco-toobarBackground, #ffffff);
   --background-activated: var(--deco-toobarBackground, #ffffff);
-  --color: var(--deco-light, #1b1e28);
-  --color-checked: var(--deco-light, #1b1e28);
+  --color: var(--deco-light, #0f150e);
+  --color-checked: var(--deco-light, #0f150e);
 }
 
 /* SETTINGS COLOR AND SIZE ICON
 =======================================================
 =======================================================*/
 [icon-small] {
-  color: var(--deco-colorIcon, #CCCBDA);
+  color: var(--deco-colorIcon, #6b6983);
   font-size: var(--icon-size-small, 20px);
 }
 
@@ -265,17 +283,16 @@ img {
   font-weight: bold !important;
 }
 
-
 [no-box-shadow] {
   box-shadow: none !important;
 }
 
 [box-shadow] {
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15) !important;
+  box-shadow: 0 0 6px rgba(63, 159, 175, 0.7) !important;
   z-index: 999;
 }
 
-[transparent]{
+[transparent] {
   --background: transparent;
 }
 
@@ -284,19 +301,127 @@ img {
   clear: both;
 }
 
-.item.sc-ion-label-md-h, .item .sc-ion-label-md-h {
+.item.sc-ion-label-md-h,
+.item .sc-ion-label-md-h {
   white-space: inherit;
 }
-.sc-ion-label-md-s h3, .sc-ion-label-md-s h4, .sc-ion-label-md-s h5, .sc-ion-label-md-s h6 {
-
-    color: black;
+.sc-ion-label-md-s h3,
+.sc-ion-label-md-s h4,
+.sc-ion-label-md-s h5,
+.sc-ion-label-md-s h6 {
+  color: black;
 }
 
 ion-card-content.ion-no-padding.md.card-content-md.hydrated {
-    color: black;
+  color: black;
 }
 
-.sc-ion-buttons-md-s ion-icon[slot=icon-only] {
+.sc-ion-buttons-md-s ion-icon[slot="icon-only"] {
   font-size: 2em;
   margin: 10px;
+}
+
+ion-header {
+  ion-title {
+    color: #000;
+  }
+  ion-toolbar {
+    ion-img {
+      width: 80px;
+      display: block;
+      margin: 0 auto;
+    }
+  }
+}
+ion-tab-bar {
+  background-color: #3f9faf;
+
+  --background-focused: #3f9faf;
+  --color: var(--ion-tab-bar-color, var(--ion-color-step-600, #434955));
+  --color-selected: var(--ion-tab-bar-color-activated, var(--ion-color-primary, #fff));
+}
+ion-tab-button {
+  background-color: #3f9faf;
+  ion-icon {
+    font-size: 25px;
+  }
+}
+
+.social-col {
+  background-color: #71b9c5;
+  text-align: center;
+}
+
+.social-icon {
+  font-size: 25px;
+}
+.facebook {
+  background-color: #3b5999;
+  margin-right: 0px;
+}
+
+.instagram {
+  background-color: #e4405f;
+}
+
+.whatsapp {
+  background-color: #25d366;
+}
+
+.youtube {
+  background-color: #cd201f;
+}
+.twitter {
+  background-color: #55acee;
+}
+.card-content-md p,
+.card-content-ios p {
+  font-size: inherit !important;
+  -webkit-touch-callout: text !important;
+  -webkit-user-select: text !important;
+  -khtml-user-select: text !important;
+  -moz-user-select: text !important;
+  -ms-user-select: text !important;
+  user-select: text !important;
+}
+
+.font-13 {
+  font-size: 13px;
+}
+
+.weather {
+  padding-left: 48px;
+  margin-top: -25px;
+  ion-label {
+    font-size: 14px;
+    padding-left: 3px;
+    padding-right: 3px;
+  }
+  i.wi {
+    font-size: 14px;
+  }
+  .currentDate {
+    position: absolute;
+    bottom: -12px;
+    font-size: 11px;
+    width: 200px;
+    left: 0;
+    padding-left: 10px;
+  }
+  .currentDate2 {
+    position: absolute;
+    bottom: -25px;
+    font-size: 11px;
+    width: 200px;
+    left: 0;
+    padding-left: 10px;
+  }
+}
+
+.wp-video {
+  width: 100% !important;
+  video {
+    width: 100% !important;
+    height: auto !important;
+  }
 }

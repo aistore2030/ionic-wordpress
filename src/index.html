@@ -7,15 +7,33 @@
 
   <base href="/" />
 
-  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport"
+    content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="format-detection" content="telephone=no" />
   <meta name="msapplication-tap-highlight" content="no" />
   <meta name="referrer" content="no-referrer" />
   <link rel="icon" type="image/png" href="assets/icon/favicon.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css">
+
 
   <!-- add to homescreen for ios -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <style>
+    #plus {
+      display: none !important;
+      visibility: hidden !important;
+    }
+
+    img[src$="100.png"] {
+      display: none !important;
+    }
+
+    #minus {
+      display: none !important;
+      visibility: hidden !important;
+    }
+  </style>
 </head>
 
 <body>

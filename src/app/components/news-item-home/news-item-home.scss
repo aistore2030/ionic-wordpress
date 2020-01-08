@@ -1,13 +1,32 @@
 :host-context(news-item-home) {
   ion-card {
     --background: var(--deco-toobarBackground, #ffffff);
+    min-height: 240px;
+    max-height: 240px;
+    overflow: hidden;
 
     img {
       height: 100px;
     }
 
+    ion-icon {
+      font-size: 12px;
+      margin-left: 3px;
+    }
+
     ion-card-content {
       padding: 8px;
+      h4 {
+        font-weight: 700;
+        max-height: 72px;
+        padding-bottom: 5px;
+        overflow: hidden;
+      }
+      .news-date {
+        display: block;
+        position: absolute;
+        bottom: -100px;
+      }
     }
 
     [card-image] {
@@ -15,7 +34,7 @@
 
       [category] {
         position: absolute;
-        top: 8px;
+        top: 10px;
       }
     }
   }

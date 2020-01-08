@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from './../../components/shared.module';
 import { SinglePage } from './single-page';
+import { MomentPipeModule } from 'src/app/common/moment.pipe.module';
 
 @NgModule({
   imports: [
@@ -12,6 +13,7 @@ import { SinglePage } from './single-page';
     FormsModule,
     IonicModule,
     SharedModule,
+    MomentPipeModule,
     RouterModule.forChild([
       {
         path: '',

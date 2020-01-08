@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { BookmarkService } from '../../services/bookmark.service';
 
@@ -8,18 +8,19 @@ import { BookmarkService } from '../../services/bookmark.service';
   styleUrls: ['bookmark.scss'],
   providers: [BookmarkService]
 })
-export class BookmarkPage {
+export class BookmarkPage implements OnInit {
   posts: any = [];
   title: any = 'Bookmark';
 
-  searchTerm: string;
+  searchTerm = '';
   filteredNews: any = [];
 
   isShowSearchBar = false;
 
   constructor(
     public navCtrl: NavController,
-    private bookmarkService: BookmarkService) {
+    private bookmarkService: BookmarkService
+  ) {
     this.loadBookmarks();
   }
 
@@ -33,7 +34,6 @@ export class BookmarkPage {
       const myrecentPosts = JSON.stringify(this.posts[i]);
       if (this.searchTerm.length > 0) {
         if (myrecentPosts.indexOf(this.searchTerm) !== -1) {
-
           this.filteredNews.push(this.posts[i]);
           console.log('newRecentPosts', this.filteredNews);
         }
@@ -41,18 +41,20 @@ export class BookmarkPage {
         this.filteredNews = this.posts;
       }
     }
-
   }
 
   loadBookmarks() {
-    const bookmarks = this.bookmarkService.getAllBookmark();
-    this.posts = [];
-    for (const item in bookmarks) {
-      this.posts.push(bookmarks[item]);
+    this.bookmarkService.getAllBookmark().then(t => {
+      const bookmarks = t;
+      this.posts = [];
+      // tslint:disable-next-line:forin
+      for (const item in bookmarks) {
+        this.posts.push(bookmarks[item]);
+        console.log('bookmark', this.posts);
+      }
+      this.filteredNews = this.posts;
       console.log('bookmark', this.posts);
-    }
-    this.filteredNews = this.posts;
-    console.log('bookmark', this.posts);
+    });
   }
 
   clearAll() {
@@ -65,8 +67,8 @@ export class BookmarkPage {
   }
 
   onBookmark(item) {
-      this.bookmarkService.delete(item);
-      this.loadBookmarks();
+    this.bookmarkService.delete(item);
+    this.loadBookmarks();
   }
   onClickSearch() {
     this.isShowSearchBar = !this.isShowSearchBar;

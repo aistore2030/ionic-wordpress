@@ -1,25 +1,33 @@
 <!-- Header -->
 <ion-header box-shadow mode="md">
   <ion-toolbar>
-      <ion-buttons slot="end" (click)="onClickSearch()">
-          <ion-icon slot="icon-only" name="search"></ion-icon>
-      </ion-buttons>
-      <ion-title>الإعدادت</ion-title>
+    <ion-buttons slot="end" (click)="onClickSearch()">
+      <ion-icon slot="icon-only" name="search"></ion-icon>
+    </ion-buttons>
+    <ion-title>الإعدادت</ion-title>
     <ion-buttons slot="start" mode="md">
-      <ion-menu-button mode="md" defaultHref="/"></ion-menu-button>
+      <ion-back-button mode="md" defaultHref="/"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
-  <ion-toolbar>
 </ion-header>
 <!-- Content -->
 <ion-content>
-  <ion-searchbar *ngIf="isShowSearchBar" [(ngModel)]="searchTerm" (ionChange)="setFilteredPosts()" placeholder="بحث"></ion-searchbar> 
+  <ion-searchbar
+    *ngIf="isShowSearchBar"
+    [(ngModel)]="searchTerm"
+    (ionChange)="setFilteredPosts()"
+    placeholder="بحث"
+  ></ion-searchbar>
   <ion-grid>
     <ion-row>
       <ion-col size="12">
         <ion-item transparent>
           <ion-lable text-size-xs>تفعيل الأشعارات</ion-lable>
-          <ion-checkbox slot="end" [(ngModel)]="isPushNotificationEnabled" (ionChange)="ionChange($event)"></ion-checkbox>
+          <ion-checkbox
+            slot="end"
+            [(ngModel)]="isPushNotificationEnabled"
+            (ionChange)="ionChange($event)"
+          ></ion-checkbox>
         </ion-item>
         <!-- <ion-item transparent>
           <ion-lable text-size-xs>اللغه العربيه</ion-lable>
@@ -28,10 +36,14 @@
         <!-- <ion-item transparent>
             <ion-lable text-size-xs>الإنجليزية</ion-lable>
             <ion-checkbox slot="end" [(ngModel)]="" (ionChange)=""></ion-checkbox> -->
-          <!-- </ion-item> -->
+        <!-- </ion-item> -->
 
-        <ion-button default-button margin (click)="changeTheme('autumn')">وضع الفاتح</ion-button>
-        <ion-button default-button margin (click)="changeTheme('night')">وضع الغامض</ion-button>
+        <ion-button default-button margin (click)="changeTheme('autumn')"
+          >وضع الفاتح</ion-button
+        >
+        <ion-button default-button margin (click)="changeTheme('night')"
+          >وضع الغامض</ion-button
+        >
       </ion-col>
     </ion-row>
   </ion-grid>

@@ -10,33 +10,63 @@
       <ion-content>
         <ion-row padding>
           <ion-col size="12" class="ion-align-self-start">
-           <img src="../assets/imgs/decoLogo.png" alt="">
+            <div class="logo">
+              <img src="../assets/imgs/logo111.png" alt="">
+            </div>
           </ion-col>
           <ion-col size="12" class="ion-align-self-center">
-            <!-- Menu List -->
+
             <ion-list class="ion-no-padding">
-              <ion-menu-toggle auto-hide="false" *ngFor="let p of pages">
-                <ion-item lines="none" class="ion-no-padding" [routerDirection]="'root'" (click)="openPage(p)">
-                  <ion-icon icon-small name="{{p.icon}}"></ion-icon>
+              <ion-menu-toggle auto-hide="false" *ngFor="let c of categories">
+                <ion-item lines="none" class="ion-no-padding" [routerDirection]="'root'"
+                  (click)="openSingleCategory(c)">
+                  <ion-icon icon-small name="list-box"></ion-icon>
                   <ion-label>
-                    <h1 text-size-xs>{{p.title}}</h1>
+                    <h1 text-size-xs>{{c.name}}</h1>
                   </ion-label>
+                  <ion-icon icon-small name="arrow-round-forward"></ion-icon>
                 </ion-item>
               </ion-menu-toggle>
+              <ion-menu-toggle auto-hide="false">
+                <ion-item lines="none" class="ion-no-padding" [routerDirection]="'root'" (click)="openPage('bookmark')">
+                  <ion-icon icon-small name="bookmark"></ion-icon>
+                  <ion-label>
+                    <h1 text-size-xs>المفضلة</h1>
+                  </ion-label>
+                  <ion-icon icon-small name="arrow-round-forward"></ion-icon>
+                </ion-item>
+              </ion-menu-toggle>
+
+              <ion-menu-toggle auto-hide="false">
+                <ion-item lines="none" class="ion-no-padding" [routerDirection]="'root'" (click)="openPage('about')">
+                  <ion-icon icon-small name="ios-flag"></ion-icon>
+                  <ion-label>
+                    <h1 text-size-xs>معلومات عنا</h1>
+                  </ion-label>
+                  <ion-icon icon-small name="arrow-round-forward"></ion-icon>
+                </ion-item>
+              </ion-menu-toggle>
+
             </ion-list>
           </ion-col>
-          <ion-col size="12" class="ion-align-self-end">
-            <a button-link target="_blank" href="#">
-              <img logo src="../assets/imgs/fb.png" alt="" />
+          <ion-col size="12">
+            <a button-link target="_blank" class="facebook"
+              href="https://www.facebook.com/%D8%A7%D9%84%D8%B1%D9%85%D9%84%D8%A9-%D8%A3%D9%88%D9%86%D9%84%D8%A7%D9%8A%D9%86-2711940442191441/">
+              <ion-icon class="social-icon" name="logo-facebook"></ion-icon>
             </a>
-            <a button-link target="_blank" href="#">
-              <img logo src="../assets/imgs/tw.png" alt="" />
+            <a button-link target="_blank" href="https://twitter.com/ramlaonline" class="twitter">
+              <ion-icon class="social-icon" name="logo-twitter"></ion-icon>
             </a>
-            <a button-link target="_blank" href="#">
-              <img logo src="../assets/imgs/yt.png" alt="" />
+            <a button-link target="_blank" class="instagram" href="https://www.instagram.com/ramlaonline/">
+              <ion-icon class="social-icon" name="logo-instagram"></ion-icon>
             </a>
-            <a button-link target="_blank" href="#">
-              <img logo src="../assets/imgs/in.png" alt="" />
+            <a button-link target="_blank" class="whatsapp"
+              href="https://api.whatsapp.com/send?phone=+972507637630&text=">
+              <ion-icon class="social-icon" name="logo-whatsapp"></ion-icon>
+            </a>
+            <a button-link target="_blank" class="youtube"
+              href="https://www.youtube.com/channel/UCETqK-jYMoAJGrMnqs5cPBw">
+              <ion-icon class="social-icon" name="logo-youtube"></ion-icon>
             </a>
           </ion-col>
         </ion-row>

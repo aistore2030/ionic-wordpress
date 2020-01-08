@@ -20,23 +20,30 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { IonicStorageModule } from '@ionic/storage';
 import { Platform } from 'ionic-angular';
 
-
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
-    BrowserModule, HttpModule, HttpClientModule,
-    IonicStorageModule.forRoot(),
+    BrowserModule,
+    HttpModule,
+    HttpClientModule,
     IonicModule.forRoot(),
-    AppRoutingModule,
+    IonicStorageModule.forRoot({
+      name: '__ramlaAppDB',
+      driverOrder: ['indexeddb', 'sqlite', 'websql']
+    }),
+    AppRoutingModule
   ],
   providers: [
-    StatusBar, SplashScreen, OneSignal, File, SocialSharing, Platform,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    StatusBar,
+    SplashScreen,
+    OneSignal,
+    File,
+    SocialSharing,
+    Platform,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
-
 })
 export class AppModule { }
-

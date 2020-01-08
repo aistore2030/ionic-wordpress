@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
-import { AboutService } from '../../services/about.service';
+import { PageService } from 'src/app/services/page.service';
 
 @Component({
   selector: 'page-about',
   templateUrl: 'about.html',
-  providers: [AboutService]
+  providers: [PageService]
 })
 export class AboutPage {
   about: any;
@@ -14,8 +14,10 @@ export class AboutPage {
 
   isShowSearchBar = false;
 
-  constructor(public navCtrl: NavController, private aboutService: AboutService) {
-    this.about = this.aboutService.getAboutInformation();
+  constructor(public navCtrl: NavController, private pageService: PageService) {
+    this.pageService.getItemById(2).subscribe(t => {
+      this.about = t;
+    });
   }
   onClickSearch() {
     this.isShowSearchBar = !this.isShowSearchBar;

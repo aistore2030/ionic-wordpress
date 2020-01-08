@@ -1,25 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
-
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  {
-    path: 'home',
-    loadChildren: '../pages/home/home.module#HomePageModule'
-  },
-  {
-    path: 'category',
-    loadChildren: '../pages/category/category.module#CategoryPageModule'
-  },
-  {
-    path: 'bookmark',
-    loadChildren: '../pages/bookmark/bookmark.module#BookmarkPageModule'
-  },
-  {
-    path: 'about',
-    loadChildren: '../pages/about/about.module#AboutPageModule'
-  },
+  { path: '', loadChildren: '../tabs/tabs.module#TabsPageModule' },
   {
     path: 'settings',
     loadChildren: '../pages/settings/settings.module#SettingsPageModule'
@@ -37,6 +20,10 @@ const routes: Routes = [
     loadChildren: '../pages/single-page/single-page.module#SinglePageModule'
   },
   {
+    path: 'page-category-news',
+    loadChildren: '../pages/category-news/category-news.module#CategoryNewsPageModule'
+  },
+  {
     path: 'form-page',
     loadChildren: '../pages/form/form.module#FormPageModule'
   },
@@ -47,7 +34,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,  { preloadingStrategy: PreloadAllModules })],
+  imports: [
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

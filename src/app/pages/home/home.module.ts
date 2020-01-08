@@ -5,6 +5,8 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from './../../components/shared.module';
 import { HomePage } from './home';
+import { MomentPipeModule } from 'src/app/common/moment.pipe.module';
+import { SortPipeModule } from 'src/app/common/sort.pipe.module';
 
 @NgModule({
   imports: [
@@ -12,6 +14,8 @@ import { HomePage } from './home';
     FormsModule,
     IonicModule,
     SharedModule,
+    MomentPipeModule,
+    SortPipeModule,
     RouterModule.forChild([
       {
         path: '',

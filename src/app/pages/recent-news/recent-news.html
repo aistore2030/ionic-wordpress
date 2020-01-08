@@ -1,19 +1,18 @@
 <!-- Header -->
 <ion-header box-shadow mode="md">
   <ion-toolbar>
-      <ion-buttons slot="end" (click)="onClickSearch()">
-          <ion-icon slot="icon-only" name="search"></ion-icon>
-      </ion-buttons>
-      <ion-title>أحدث الأخبار</ion-title>
+    <ion-buttons class="weather" slot="end">
+    </ion-buttons>
+    <ion-title>أحدث الأخبار</ion-title>
     <ion-buttons slot="start" mode="md">
-      <ion-menu-button mode="md" defaultHref="/"></ion-menu-button>
+      <ion-back-button mode="md" defaultHref="/"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
-  <ion-toolbar>
 </ion-header>
 <!-- Content -->
 <ion-content>
-    <ion-searchbar *ngIf="isShowSearchBar" [(ngModel)]="searchTerm" (ionChange)="setFilteredPosts()" placeholder="بحث"></ion-searchbar> 
+  <ion-searchbar *ngIf="isShowSearchBar" [(ngModel)]="searchTerm" (ionChange)="setFilteredPosts()" placeholder="بحث">
+  </ion-searchbar>
   <ion-grid>
     <news-list [categoryId]="categoryId" [title]=""></news-list>
   </ion-grid>

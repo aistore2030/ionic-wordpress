@@ -17,12 +17,13 @@ export class CommentsPage {
   constructor(public navCtrl: NavController,
     private route: ActivatedRoute,
     private commentService: CommentService) {
-      const self = this;
-      this.route.queryParams.subscribe(params => {
-        self.post = JSON.parse(params['item']);
-        self.onCompleteEvent(this.post.comments);
-        self.doRefresh(null);
-      });
+    const self = this;
+    this.commentPageLoaded = 1;
+    this.route.queryParams.subscribe(params => {
+      self.post = JSON.parse(params['item']);
+      self.onCompleteEvent(this.post.comments);
+      self.doRefresh(null);
+    });
   }
 
   openComment(event) {
@@ -42,21 +43,21 @@ export class CommentsPage {
 
   doRefresh(event) {
     this.commentService
-        .getAllCommentsForPostById(this.post.id, this.commentPageLoaded++)
-        .subscribe((comments: Array<any>) => {
-          this.onCompleteEvent(comments);
-          if (event) {
-            event.target.complete();
-          }
-        }, err => {
-          if (event) {
-            event.target.complete();
-          }
-        }, () => {
-          if (event) {
-            event.target.complete();
-          }
-        });
+      .getAllCommentsForPostById(this.post.id, this.commentPageLoaded++)
+      .subscribe((comments: Array<any>) => {
+        this.onCompleteEvent(comments);
+        if (event) {
+          event.target.complete();
+        }
+      }, err => {
+        if (event) {
+          event.target.complete();
+        }
+      }, () => {
+        if (event) {
+          event.target.complete();
+        }
+      });
   }
 
   doInfinite(event) {

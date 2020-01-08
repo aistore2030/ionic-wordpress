@@ -2,7 +2,7 @@ import { OneSignal } from '@ionic-native/onesignal/ngx';
 import { ConfigData } from 'src/app/services/config';
 
 function enablePushNotification(oneSignal: OneSignal) {
-    localStorage.setItem('isPushNotificationEnabled', 'true');
+    this.storage.set('isPushNotificationEnabled', 'true');
     if (oneSignal && ConfigData.oneSignal && ConfigData.oneSignal.appID && ConfigData.oneSignal.googleProjectId) {
         oneSignal.startInit(ConfigData.oneSignal.appID, ConfigData.oneSignal.googleProjectId);
         oneSignal.inFocusDisplaying(oneSignal.OSInFocusDisplayOption.InAppAlert);
@@ -11,7 +11,7 @@ function enablePushNotification(oneSignal: OneSignal) {
 }
 
 function disablePushNotification(oneSignal: OneSignal) {
-    localStorage.setItem('isPushNotificationEnabled', 'false');
+    this.storage.set('isPushNotificationEnabled', 'false');
     if (oneSignal) {
         oneSignal.startInit('', '');
         oneSignal.inFocusDisplaying(oneSignal.OSInFocusDisplayOption.InAppAlert);
@@ -20,9 +20,9 @@ function disablePushNotification(oneSignal: OneSignal) {
 }
 
 function initOneSignal(oneSignal: OneSignal) {
-    let pushNotificationEnabledStorageValue = localStorage.getItem('isPushNotificationEnabled');
+    let pushNotificationEnabledStorageValue = this.storage.getItem('isPushNotificationEnabled');
     if (!pushNotificationEnabledStorageValue) {
-        localStorage.setItem('isPushNotificationEnabled', 'true');
+        this.storage.set('isPushNotificationEnabled', 'true');
         pushNotificationEnabledStorageValue = 'true';
     }
 
@@ -34,8 +34,8 @@ function initOneSignal(oneSignal: OneSignal) {
 }
 
 export const OneSignalConfig = {
-    'enablePushNotification' : enablePushNotification,
-    'disablePushNotification' : disablePushNotification,
+    'enablePushNotification': enablePushNotification,
+    'disablePushNotification': disablePushNotification,
     'initOneSignal': initOneSignal
 };
 

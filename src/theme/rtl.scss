@@ -2,9 +2,12 @@
 =======================================================
 =======================================================*/
 
-html[dir=rtl] {
+html[dir="rtl"] {
   /* Settings Home page */
-  page-home {
+  page-home,
+  page-category-news,
+  page-report-news,
+  page-ramla-news {
     [background-size] {
       [category],
       [wizard-title],
@@ -27,6 +30,5 @@ html[dir=rtl] {
   }
   /* Settings Single page*/
   single-page {
-
   }
 }

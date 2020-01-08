@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { OneSignal } from '@ionic-native/onesignal/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { ThemeService } from '../../services/theme.service';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'settings',
@@ -10,7 +11,6 @@ import { ThemeService } from '../../services/theme.service';
   styleUrls: ['settings.scss']
 })
 export class SettingsPage {
-
   themes = {
     autumn: {
       primary: '#ffffff',
@@ -28,19 +28,19 @@ export class SettingsPage {
       toobarText: '#FFFFFF'
     },
     night: {
-       primary: '#282C39',
-       secondary: '#1b1e28',
-       danger: '#f53d3d',
-       sliderColor: '#ffffff',
-       light: '#ffffff',
-       colorIcon: '#7F7E96',
-       colorIconText: '#7F7E96',
-       category: '#ffffff',
-       listBackgroundColor: '#1B1E28',
-       backgroundColor: '#282C39',
-       toobarBackground: '#1B1E28',
-       toobarButton: '#D8D8D8',
-       toobarText: '#FFFFFF',
+      primary: '#282C39',
+      secondary: '#1b1e28',
+      danger: '#f53d3d',
+      sliderColor: '#ffffff',
+      light: '#ffffff',
+      colorIcon: '#7F7E96',
+      colorIconText: '#7F7E96',
+      category: '#ffffff',
+      listBackgroundColor: '#1B1E28',
+      backgroundColor: '#282C39',
+      toobarBackground: '#1B1E28',
+      toobarButton: '#D8D8D8',
+      toobarText: '#FFFFFF'
     }
   };
 
@@ -50,13 +50,20 @@ export class SettingsPage {
   isShowSearchBar = false;
 
   isLightColorSelected: Boolean = true;
-  isPushNotificationEnabled = false;
+  isPushNotificationEnabled = true;
   isRTLEnabled: Boolean = true;
 
-  constructor(private oneSignal: OneSignal, private file: File, private theme: ThemeService) {
-    this.isPushNotificationEnabled = localStorage.getItem('isPushNotificationEnabled') === 'true';
-    this.isLightColorSelected = localStorage.getItem('isLightColorSelected') === 'true';
-    this.isRTLEnabled = localStorage.getItem('isRTLEnabled') === 'true';
+  constructor(
+    private oneSignal: OneSignal,
+    private file: File,
+    private theme: ThemeService,
+    private storage: Storage
+  ) {
+    // this.isPushNotificationEnabled =
+    //   this.storage.getItem('isPushNotificationEnabled') === 'true';
+    // this.isLightColorSelected =
+    //   this.storage.getItem('isLightColorSelected') === 'true';
+    // this.isRTLEnabled = this.storage.getItem('isRTLEnabled') === 'true';
   }
 
   changeTheme(name) {
@@ -64,51 +71,77 @@ export class SettingsPage {
   }
 
   ionChangeSelectedTheme(e) {
-    localStorage.setItem('isLightColorSelected', this.isLightColorSelected + '');
-    this.writeToFile();
-    const theme = this.isLightColorSelected ? 'colorLight' : 'colorDark';
-    document.getElementsByTagName('body')[0].setAttribute('class', theme);
+    // this.storage.setItem(
+    //   'isLightColorSelected',
+    //   this.isLightColorSelected + ''
+    // );
+    // this.writeToFile();
+    // const theme = this.isLightColorSelected ? 'colorLight' : 'colorDark';
+    // document.getElementsByTagName('body')[0].setAttribute('class', theme);
   }
 
   // Enable/Disable push notification OneSignal
   ionChange(e) {
     this.oneSignal.setSubscription(this.isPushNotificationEnabled);
-    localStorage.setItem('isPushNotificationEnabled', '' + this.isPushNotificationEnabled);
+    // this.storage.setItem(
+    //   'isPushNotificationEnabled',
+    //   '' + this.isPushNotificationEnabled
+    // );
     this.writeToFile();
     if (this.isPushNotificationEnabled) {
-      this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification);
+      this.oneSignal.inFocusDisplaying(
+        this.oneSignal.OSInFocusDisplayOption.Notification
+      );
     } else {
-      this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.None);
+      this.oneSignal.inFocusDisplaying(
+        this.oneSignal.OSInFocusDisplayOption.None
+      );
     }
     this.oneSignal.endInit();
   }
 
   ionChangeRTL(e) {
-      localStorage.setItem('isRTLEnabled', '' + this.isRTLEnabled);
-      document.getElementsByTagName('ion-menu')[0]
-              .setAttribute('side', this.isRTLEnabled  ? 'end' : 'start');
-      document.getElementsByTagName('html')[0]
-              .setAttribute('dir', this.isRTLEnabled  ? 'rtl' : 'ltr');
-              console.log('Here', this.isRTLEnabled);
-              console.log('Here', localStorage.setItem('isRTLEnabled', '' + this.isRTLEnabled));
+    // this.storage.setItem('isRTLEnabled', '' + this.isRTLEnabled);
+    document
+      .getElementsByTagName('ion-menu')[0]
+      .setAttribute('side', this.isRTLEnabled ? 'end' : 'start');
+    document
+      .getElementsByTagName('html')[0]
+      .setAttribute('dir', this.isRTLEnabled ? 'rtl' : 'ltr');
+    console.log('Here', this.isRTLEnabled);
+    console.log(
+      'Here',
+      // this.storage.setItem('isRTLEnabled', '' + this.isRTLEnabled)
+    );
   }
 
   getSettingsObject() {
-    const result = {
-        'bookmark': localStorage.getItem('bookmark'),
-        'isPushNotificationEnabled': localStorage.getItem('isPushNotificationEnabled'),
-        'isLightColorSelected': localStorage.getItem('isLightColorSelected'),
-        'isRTLEnabled': localStorage.getItem('isRTLEnabled'),
-    };
-    return JSON.stringify(result);
+    // const result = {
+    //   bookmark: this.storage.getItem('bookmark'),
+    //   isPushNotificationEnabled: this.storage.getItem(
+    //     'isPushNotificationEnabled'
+    //   ),
+    //   isLightColorSelected: this.storage.getItem('isLightColorSelected'),
+    //   isRTLEnabled: this.storage.getItem('isRTLEnabled')
+    // };
+    // return JSON.stringify(result);
   }
 
   writeToFile() {
-    this.file.writeFile(this.file.externalRootDirectory, 'settings.json', this.getSettingsObject(), {replace: true});
+    this.file.writeFile(
+      this.file.applicationDirectory,
+      'settings.json',
+      '{}',
+      // this.getSettingsObject(),
+      { replace: true }
+    );
   }
 
   readFromFile() {
-      return this.file.readAsText(this.file.externalRootDirectory, 'settings.json');
+    return this.file.readAsText(
+      this.file.applicationDirectory,
+      'settings.json'
+    );
   }
   onClickSearch() {
     this.isShowSearchBar = !this.isShowSearchBar;

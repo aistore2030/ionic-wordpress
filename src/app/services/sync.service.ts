@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { UserService } from './user.service';
 import { CategoryService } from './categoty.service';
 import { Observable } from 'rxjs/Observable';
+import { Storage } from '@ionic/storage';
 
 @Injectable({ providedIn: 'root' })
 export class SyncService {
-  constructor(private userService: UserService, private categoryService: CategoryService) { }
+  constructor(private userService: UserService, private categoryService: CategoryService, private storage: Storage) { }
 
   sync() {
     return new Observable(observer => {
@@ -17,7 +18,7 @@ export class SyncService {
         items.forEach(element => {
           storeItem[element.id] = element;
         });
-        localStorage.setItem('users', JSON.stringify(storeItem));
+        this.storage.set('users', JSON.stringify(storeItem));
       });
 
       this.categoryService.getCategories(1).subscribe((items: Array<any>) => {
@@ -28,7 +29,7 @@ export class SyncService {
         items.forEach(element => {
           storeItem[element.id] = element;
         });
-        localStorage.setItem('category', JSON.stringify(storeItem));
+        this.storage.set('category', JSON.stringify(storeItem));
         observer.next(storeItem);
         observer.complete();
       });

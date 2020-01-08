@@ -9,7 +9,7 @@
       <!-- Data time -->
       <ion-chip>
         <ion-icon class="ion-no-margin" icon-small name="ios-stopwatch"></ion-icon>
-        <ion-label text-size-p>{{data.time | date:'d MMMM yyyy'}}</ion-label>
+        <ion-label text-size-p>{{data.time | moment:'full'}}</ion-label>
       </ion-chip>
       <!-- Bookmark -->
       <div bookMark (click)="bookmark(data, $event)">

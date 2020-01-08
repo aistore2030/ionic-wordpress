@@ -1,19 +1,16 @@
 <!-- Header -->
 <ion-header box-shadow mode="md">
   <ion-toolbar>
-      <ion-buttons slot="end" (click)="onClickSearch()">
-          <ion-icon slot="icon-only" name="search"></ion-icon>
-      </ion-buttons>
-      <ion-title>المفضلة</ion-title>
+    <ion-title>المفضلة</ion-title>
     <ion-buttons slot="start" mode="md">
-      <ion-menu-button mode="md" defaultHref="/"></ion-menu-button>
+      <ion-back-button mode="md" defaultHref="/"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
-  <ion-toolbar>
 </ion-header>
 <!-- Content -->
 <ion-content>
-  <ion-searchbar *ngIf="isShowSearchBar" [(ngModel)]="searchTerm" (ionChange)="setFilteredBookmark()" placeholder="بحث"></ion-searchbar> 
+  <ion-searchbar *ngIf="isShowSearchBar" [(ngModel)]="searchTerm" (ionChange)="setFilteredBookmark()" placeholder="بحث">
+  </ion-searchbar>
   <ion-grid>
     <ion-row *ngIf="posts.length">
       <ion-col size="12">
@@ -29,8 +26,11 @@
       <ion-col>
         <div no-post text-center>
           <img src="../assets/imgs/decoLogo.png" alt="" />
-          <h1 text-size-xl>Uups, no data!</h1>
-          <p text-size-md>أضف شيئًا إلى الإشارات المرجعية من خلال النقر على أيقونة الإشارة المرجعية</p>
+          <h1 text-size-xl>عذرا، لا يوجد بيانات</h1>
+          <p text-size-md>
+            أضف شيئًا إلى الإشارات المرجعية من خلال النقر على أيقونة الإشارة
+            المرجعية
+          </p>
         </div>
       </ion-col>
     </ion-row>

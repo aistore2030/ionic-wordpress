@@ -8,12 +8,14 @@ import { ConfigData } from 'src/app/services/config';
 import { AdMobFreeInterstitial } from '@ionic-native/admob-free/ngx';
 
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'single-page',
   templateUrl: 'single-page.html',
   styleUrls: ['single-page.scss'],
-  providers: [CommentService, BookmarkService, AdMobFreeInterstitial]
+  providers: [CommentService, BookmarkService, AdMobFreeInterstitial, PhotoViewer]
 })
 export class SinglePage {
   active: boolean;
@@ -21,6 +23,7 @@ export class SinglePage {
   post: any;
   htmlContent: any;
   htmlTitle: any;
+  fontSize = 15;
   @ViewChild(IonContent) content: IonContent;
 
   constructor(public navCtrl: NavController,
@@ -30,7 +33,9 @@ export class SinglePage {
     private domSanitizer: DomSanitizer,
     private commentService: CommentService,
     private socialSharing: SocialSharing,
-    private bookmarkService: BookmarkService) {
+    private bookmarkService: BookmarkService,
+    private photoViewer: PhotoViewer,
+    private storage: Storage) {
     const self = this;
     this.route.queryParams.subscribe(params => {
       self.post = JSON.parse(params['item']);
@@ -50,29 +55,54 @@ export class SinglePage {
         });
     });
     this.incrementPostCounter();
-    this.showAdsAfterXPosts();
+    // this.showAdsAfterXPosts();
+  }
+
+  // tslint:disable-next-line:use-life-cycle-interface
+  ngOnInit() {
+  }
+
+  larger() {
+    if (this.fontSize < 20) {
+      this.fontSize += 1;
+    }
+  }
+
+  smaller() {
+    if (this.fontSize > 14) {
+      this.fontSize -= 1;
+    }
+  }
+
+  open(link) {
+    this.photoViewer.show(link, 'Optional Title');
   }
 
   incrementPostCounter() {
     let counter = 0;
-    if (localStorage.getItem('post-counter')) {
-      // tslint:disable-next-line:radix
-      counter = parseInt(localStorage.getItem('post-counter'));
-    }
-    counter++;
-    localStorage.setItem('post-counter', counter + '');
+    this.storage.get('post-counter').then(t => {
+      if (t) {
+        // tslint:disable-next-line:radix
+        counter = parseInt(t);
+        counter++;
+        this.storage.set('post-counter', counter + '');
+      }
+    });
   }
 
   showAdsAfterXPosts() {
-    let counter = 0;
-    if (localStorage.getItem('post-counter')) {
-      // tslint:disable-next-line: radix
-      counter = parseInt(localStorage.getItem('post-counter'));
-    }
-    if (ConfigData.interstitialAds.showAdsAfterXPosts <= counter) {
-      this.showInterstitialAds();
-      localStorage.setItem('post-counter', '0');
-    }
+    this.storage.get('post-counter').then(t => {
+      let counter = 0;
+      if (t) {
+        // tslint:disable-next-line:radix
+        counter = parseInt(t);
+      }
+      if (ConfigData.interstitialAds.showAdsAfterXPosts <= counter) {
+        this.showInterstitialAds();
+        this.storage.set('post-counter', '0');
+      }
+    });
+
   }
 
   showInterstitialAds() {
@@ -116,12 +146,12 @@ export class SinglePage {
   }
 
   share = (item, e) => {
-    this.socialSharing.shareViaFacebook(item.title, '', item.link)
-    .then(() => {
+    console.log(item.title.replace('&#8220;', '"').replace('&#8220;', '"'));
+    this.socialSharing.share(item.title.replace('&#8220;', '"').replace('&#8220;', '"'), '', '', decodeURI(item.link))
+      .then(() => {
 
-    }).catch(() => {
-
-    });
+      }).catch(() => {
+      });
   }
 
   bookmark = (item, e) => {
@@ -143,10 +173,22 @@ export class SinglePage {
 
   ionViewDidLeave() {
     Array
-     .prototype.slice
-     .call(document.getElementsByTagName('video'))
-     .forEach(video => video.pause());
- }
+      .prototype.slice
+      .call(document.getElementsByTagName('video'))
+      .forEach(video => video.pause());
+  }
+
+  ionViewDidEnter() {
+    const self = this;
+    const imgs = document.getElementsByTagName('single-page')[0].getElementsByTagName('img');
+    for (let i = 0; i < imgs.length; i++) {
+      imgs[i].addEventListener('click', () => {
+        const large = imgs[i].src.split('?')[0];
+        self.photoViewer.show(large, '');
+      });
+    }
+  }
+
 
   subscribeToIonScroll() { }
 }

@@ -36,19 +36,3 @@ export class ThemeService {
     return this.storage.get('theme');
   }
 }
-
-export const defaults = {
-  primary: '#ffffff',
-  secondary: '#fafafa',
-  danger: '#f53d3d',
-  light: '#1b1e28',
-  sliderColor: '#ffffff',
-  colorIcon: '#CCCBDA',
-  colorIconText: '#7F7E96',
-  category: '#ffffff',
-  listBackgroundColor: '#ffffff',
-  backgroundColor: '#fafafa',
-  toobarBackground: '#ffffff',
-  toobarButton: '#AAB2B7',
-  toobarText: '#FFFFFF'
-};

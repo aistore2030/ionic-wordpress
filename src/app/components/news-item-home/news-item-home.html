@@ -5,15 +5,15 @@
       <span border-radius category text-uppercase>{{data.category}}</span>
     </div>
     <ion-card-content style="top: 25%">
-        <h4 text-wrap text-size-xs [innerHTML]=data.title style="display: inline-block; float: right;"></h4>
-        <div dataTime style="display: inline; float: right;">
-            <ion-chip>
-              <ion-icon icon name="ios-stopwatch"></ion-icon>
-              <ion-label text-size-p >{{data.time | date:'d MMMM yyyy'}}</ion-label>
-            </ion-chip>
-        </div>
-      </ion-card-content>
-      
+      <h4 text-wrap text-size-xs [innerHTML]=data.title style="display: inline-block; float: right;"></h4>
+      <div dataTime class="news-date">
+        <ion-chip>
+          <ion-icon icon name="ios-stopwatch"></ion-icon>
+          <ion-label text-size-p>{{data.time | moment:'full'}}</ion-label>
+        </ion-chip>
+      </div>
+    </ion-card-content>
+
   </div>
-  
+
 </ion-card>

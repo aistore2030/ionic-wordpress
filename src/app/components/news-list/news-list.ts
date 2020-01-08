@@ -24,8 +24,8 @@ export class NewsListPage {
     private postService: PostService,
     private mediaService: MediaService,
     private bookmarkService: BookmarkService) {
-      this.bookmarks = this.bookmarkService.getAllBookmark();
-    }
+    this.bookmarks = this.bookmarkService.getAllBookmark();
+  }
 
   // tslint:disable-next-line: use-life-cycle-interface
   ngOnChanges() {
@@ -40,8 +40,8 @@ export class NewsListPage {
     this.onItemClick.emit(item);
   }
 
-  loadData(categoryId, event) {
-    this.postService.getPostListWithFilter(categoryId, this.postPageLoaded++).subscribe((data: Array<any>) => {
+  async loadData(categoryId, event) {
+    (await this.postService.getPostListWithFilter(categoryId, this.postPageLoaded++)).subscribe((data: Array<any>) => {
       console.log('postService');
       const newData = this.postId ? data.filter(it => it.id !== this.postId) : data;
       this.posts = this.posts.concat(newData);
@@ -64,18 +64,18 @@ export class NewsListPage {
         }
       });
     },
-    err => {
-      console.log('err');
-      if (event) {
-        event.target.complete();
+      err => {
+        console.log('err');
+        if (event) {
+          event.target.complete();
+        }
+      }, () => {
+        console.log('done');
+        if (event) {
+          event.target.complete();
+        }
       }
-    }, () => {
-      console.log('done');
-      if (event) {
-        event.target.complete();
-      }
-    }
-  );
+    );
 
   }
 

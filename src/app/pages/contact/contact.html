@@ -1,0 +1,45 @@
+<!-- Header -->
+<ion-header box-shadow mode="md">
+  <ion-toolbar>
+    <ion-buttons class="weather" slot="end">
+    </ion-buttons>
+    <ion-title>راسلنا</ion-title>
+    <ion-buttons slot="start" mode="md">
+      <ion-back-button mode="md" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<!-- Content -->
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-card>
+          <!-- Input type name-->
+          <ion-item margin-top lines="none">
+            <ion-input type="text" placeholder="الاسم" [(ngModel)]="authorName"></ion-input>
+            <!-- Error for name valid-->
+            <div item-content>
+              <ion-icon ion-text *ngIf="!isAuthorValid" color="danger" name="remove-circle"></ion-icon>
+            </div>
+          </ion-item>
+          <!-- Input type Comment -->
+          <ion-item textarea margin-top lines="none" textarea>
+            <ion-textarea placeholder="الرسالة" [(ngModel)]="comment"></ion-textarea>
+            <!-- Error for comments valid-->
+            <div item-content>
+              <ion-icon margin-top ion-text *ngIf="!isCommentValid" color="danger" name="remove-circle"></ion-icon>
+            </div>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <!-- Wtite a comment-->
+    <ion-button default-button expand="full" text-capitalize box-shadow (click)="addComment($event)">أرسل
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

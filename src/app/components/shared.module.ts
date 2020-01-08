@@ -6,12 +6,16 @@ import { IonicModule } from '@ionic/angular';
 import { NewsItemPage } from './news-item/news-item';
 import { NewsItemHomePage } from './news-item-home/news-item-home';
 import { NewsListPage } from './news-list/news-list';
+import { MomentPipeModule } from '../common/moment.pipe.module';
+import { SortPipeModule } from '../common/sort.pipe.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule
+    IonicModule,
+    MomentPipeModule,
+    SortPipeModule
   ],
   declarations: [
     NewsItemPage, NewsItemHomePage, NewsListPage

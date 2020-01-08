@@ -22,16 +22,18 @@ export class FormPage {
   // tslint:disable-next-line: max-line-length
   regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-  constructor(public navCtrl: NavController,
+  constructor(
+    public navCtrl: NavController,
     private route: ActivatedRoute,
-    private commentService: CommentService) {
-      const self = this;
-      this.route.queryParams.subscribe(params => {
-          self.postId = params['postId'];
-          if (!this.postId) {
-            self.navCtrl.pop();
-          }
-      });
+    private commentService: CommentService
+  ) {
+    const self = this;
+    this.route.queryParams.subscribe(params => {
+      self.postId = params['postId'];
+      if (!this.postId) {
+        self.navCtrl.pop();
+      }
+    });
   }
 
   resetError() {
@@ -53,14 +55,19 @@ export class FormPage {
     return this.isAuthorValid && this.isEmailValid && this.isCommentValid;
   }
 
-  addComment() {
+  addComment(event) {
     this.resetError();
     if (this.isDataValid()) {
       this.commentService
-      .addComment(this.postId, this.comment, this.authorName, this.authorEmail)
-      .subscribe(item => {
-        this.navCtrl.pop();
-      });
+        .addComment(
+          this.postId,
+          this.comment,
+          this.authorName,
+          this.authorEmail
+        )
+        .subscribe(item => {
+          this.navCtrl.pop();
+        });
     }
   }
 }

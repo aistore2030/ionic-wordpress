@@ -24,7 +24,7 @@ export class CategoryPage {
     public navCtrl: NavController,
     private categoryService: CategoryService,
     private domSanitizer: DomSanitizer) {
-      this.loadCategories(null);
+    this.loadCategories(null);
   }
 
   // tslint:disable-next-line:use-life-cycle-interface
@@ -40,7 +40,6 @@ export class CategoryPage {
         if (myCategories.indexOf(this.searchTerm) !== -1) {
 
           this.filteredNews.push(this.categories[i]);
-          console.log('newcategories', this.filteredNews);
         }
       } else {
         this.filteredNews = this.categories;
@@ -58,7 +57,7 @@ export class CategoryPage {
 
   getHtmlTitle(title) {
     if (title) {
-        return this.domSanitizer.bypassSecurityTrustHtml(title);
+      return this.domSanitizer.bypassSecurityTrustHtml(title);
     }
   }
 
@@ -68,24 +67,23 @@ export class CategoryPage {
 
   loadCategories(event) {
     this.categoryService
-    .getCategories(this.categoryPageLoaded++)
-    .subscribe((data: Array<any>) => {
-      if (data) {
-        const newData = data.filter(item => {
-          if (item.count === 0) { return false; }
-          if (!ConfigData.enableExcludeFromMenu) { return true; }
+      .getCategories(this.categoryPageLoaded++)
+      .subscribe((data: Array<any>) => {
+        if (data) {
+          const newData = data.filter(item => {
+            if (item.count === 0) { return false; }
+            if (!ConfigData.enableExcludeFromMenu) { return true; }
             return ConfigData.excludeFromMenu[item.id];
-        });
-        if (newData && newData.length > 0) {
-          this.categories = this.categories.concat(newData);
-          this.filteredNews = this.categories;
-          console.log('categories', this.categories);
+          });
+          if (newData && newData.length > 0) {
+            this.categories = this.categories.concat(newData);
+            this.filteredNews = this.categories;
+          }
         }
-      }
-      if (event) {
-        event.target.complete();
-      }
-    });
+        if (event) {
+          event.target.complete();
+        }
+      });
   }
   onClickSearch() {
     this.isShowSearchBar = !this.isShowSearchBar;

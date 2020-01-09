@@ -11,9 +11,6 @@ import { BookmarkService } from '../../services/bookmark.service';
 import { NavigationExtras } from '@angular/router';
 import { ConfigData } from '../../services/config';
 import { DomSanitizer } from '@angular/platform-browser';
-import { CLOUD, SUN, RAIN, SNOW, THUNDER, DRIZZLE } from 'src/app/services/constants/weatherIconState';
-import { WeatherProvider } from 'src/app/services/weather.service';
-import { transformForecast } from 'src/app/services/transformWeather';
 
 @Component({
   selector: 'page-ramla-news',
@@ -26,8 +23,7 @@ import { transformForecast } from 'src/app/services/transformWeather';
     PostService,
     MediaService,
     BookmarkService,
-    AdMobFree,
-    WeatherProvider
+    AdMobFree
   ]
 })
 export class RamlaNewsPage {
@@ -46,30 +42,13 @@ export class RamlaNewsPage {
   category: any;
   isInfiniteScrollActive = true;
 
-
-  forecastData;
-  forecastList;
-  currentDay;
-  currentDate = new Date();
-  URL = 'http://ramlaonline.com/?p=';
-
-  icons = {
-    [CLOUD]: 'cloud',
-    [SUN]: 'day-sunny',
-    [RAIN]: 'rain',
-    [SNOW]: 'snow',
-    [THUNDER]: 'day-thunderstorm',
-    [DRIZZLE]: 'day-showers'
-  };
-
   constructor(
     private admobFree: AdMobFree,
     public navCtrl: NavController,
     private domSanitizer: DomSanitizer,
     private postService: PostService,
     private mediaService: MediaService,
-    private bookmarkService: BookmarkService,
-    private weatherApi: WeatherProvider
+    private bookmarkService: BookmarkService
   ) {
     this.postPageLoaded = 1;
     // this.showBannerAds();
@@ -83,23 +62,7 @@ export class RamlaNewsPage {
   }
   // tslint:disable-next-line:use-life-cycle-interface
   ngOnInit() {
-    // this.weatherApi.query('forecast', { id: 294640, units: 'metric' })
-    //   .subscribe(async cityDetails => {
-
-    //     this.forecastData = cityDetails;
-    //     this.forecastList = transformForecast(this.forecastData);
-    //     this.currentDay = this.forecastList.shift();
-    //     console.log(this.forecastList);
-    //   });
     this.setFilteredPosts();
-  }
-
-  getWeatherIconClass(weatherState) {
-    return this.icons[weatherState];
-  }
-
-  getWeatherIcon(weatherState) {
-    return `wi-${this.getWeatherIconClass(weatherState.weatherState)}`;
   }
 
   setFilteredPosts() {
@@ -109,7 +72,6 @@ export class RamlaNewsPage {
       if (this.searchTerm.length > 0) {
         if (myrecentPosts.indexOf(this.searchTerm) !== -1) {
           this.filteredNews.push(this.postsRecentNews[i]);
-          console.log('newRecentPosts', this.filteredNews);
         }
       } else {
         this.filteredNews = this.postsRecentNews;
@@ -118,10 +80,8 @@ export class RamlaNewsPage {
   }
 
   doRefresh(event) {
-    console.log('Begin async operation');
     const self = this;
     setTimeout(() => {
-      console.log('Async operation has ended');
       self.refreshData(self.category);
       event.target.complete();
     }, 2000);
@@ -157,7 +117,6 @@ export class RamlaNewsPage {
         if (data.length < 10) {
           this.isInfiniteScrollActive = false;
         }
-        // console.log("postService", this.postService);
         if (this.posts && this.posts.length === 0) {
           this.posts = data.slice(0, 3);
           if (data.length > 3) {
@@ -165,12 +124,10 @@ export class RamlaNewsPage {
               data.slice(3, data.length)
             );
             this.filteredNews = this.postsRecentNews;
-            console.log('postsRecentNews1', this.postsRecentNews);
           }
         } else {
           this.postsRecentNews = this.postsRecentNews.concat(data);
           this.filteredNews = this.postsRecentNews;
-          console.log('postsRecentNews2', this.postsRecentNews);
         }
 
         if (event) {

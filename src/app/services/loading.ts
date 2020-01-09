@@ -24,7 +24,6 @@ export class LoadingService {
     return await this.loader.then(a => {
       if (this.pendingRequests === 0) {
         a.present().then(() => {
-          console.log('presented');
           this.isLoading = true;
         });
       }
@@ -39,7 +38,6 @@ export class LoadingService {
       }
       if (this.pendingRequests === 0) {
         a.dismiss().then(() => {
-          console.log('dismiss');
         });
         this.create();
       }

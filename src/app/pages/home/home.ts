@@ -24,7 +24,6 @@ import {
 import { WeatherProvider } from 'src/app/services/weather.service';
 import { transformForecast } from 'src/app/services/transformWeather';
 import { Slides } from 'ionic-angular';
-import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'page-home',
@@ -110,14 +109,11 @@ export class HomePage {
         this.forecastData = cityDetails;
         this.forecastList = transformForecast(this.forecastData);
         this.currentDay = this.forecastList.shift();
-        console.log(this.forecastList);
       });
   }
 
   doRefresh(event) {
-    console.log('Begin async operation');
     setTimeout(() => {
-      console.log('Async operation has ended');
       this.buildCatNews();
       this.buildWeather();
       event.target.complete();
@@ -216,7 +212,6 @@ export class HomePage {
 
               });
           });
-          console.log(this.allCatNews);
         }
       } else {
         this.categoryService.getCategories(1).subscribe((data: Array<any>) => {
@@ -286,7 +281,6 @@ export class HomePage {
 
                 });
             });
-            console.log(this.allCatNews);
           }
         });
       }
@@ -300,7 +294,6 @@ export class HomePage {
       if (this.searchTerm.length > 0) {
         if (myrecentPosts.indexOf(this.searchTerm) !== -1) {
           this.filteredNews.push(this.postsRecentNews[i]);
-          console.log('newRecentPosts', this.filteredNews);
         }
       } else {
         this.filteredNews = this.postsRecentNews;
@@ -376,12 +369,10 @@ export class HomePage {
               data.slice(3, data.length)
             );
             this.filteredNews = this.postsRecentNews;
-            console.log('postsRecentNews1', this.postsRecentNews);
           }
         } else {
           this.postsRecentNews = this.postsRecentNews.concat(data);
           this.filteredNews = this.postsRecentNews;
-          console.log('postsRecentNews2', this.postsRecentNews);
         }
 
         if (event) {

@@ -11,6 +11,9 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
 import { Storage } from '@ionic/storage';
 
+import * as PhotoSwipeUI_Default from 'photoswipe/dist/photoswipe-ui-default';
+import * as PhotoSwipe from 'photoswipe';
+
 @Component({
   selector: 'single-page',
   templateUrl: 'single-page.html',
@@ -146,7 +149,6 @@ export class SinglePage {
   }
 
   share = (item, e) => {
-    console.log(item.title.replace('&#8220;', '"').replace('&#8220;', '"'));
     this.socialSharing.share(item.title.replace('&#8220;', '"').replace('&#8220;', '"'), '', '', decodeURI(item.link))
       .then(() => {
 
@@ -179,16 +181,40 @@ export class SinglePage {
   }
 
   ionViewDidEnter() {
-    const self = this;
-    const imgs = document.getElementsByTagName('single-page')[0].getElementsByTagName('img');
+    const imgs = document.getElementsByTagName('single-page')[0]
+      .getElementsByClassName('my-gallery')[0].getElementsByTagName('img');
     for (let i = 0; i < imgs.length; i++) {
       imgs[i].addEventListener('click', () => {
-        const large = imgs[i].src.split('?')[0];
-        self.photoViewer.show(large, '');
+        this.initSwipe(i, imgs);
       });
     }
   }
 
-
+  initSwipe(currentIndex, allElements) {
+    const pswpElement = document.querySelectorAll('.pswp')[0] as HTMLAnchorElement;
+    const items = [];
+    for (let i = 0; i < allElements.length; i++) {
+      const large = allElements[i].src.split('?')[0];
+      items.push({
+        src: large,
+        w: 600,
+        h: 400
+      });
+    }
+    const options = {
+      index: parseInt(currentIndex, 10),
+      closeEl: true,
+      captionEl: true,
+      fullscreenEl: false,
+      zoomEl: false,
+      shareEl: false,
+      counterEl: true,
+      arrowEl: true,
+      preloaderEl: true
+    };
+    // Initializes and opens PhotoSwipe
+    const gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
+    gallery.init();
+  }
   subscribeToIonScroll() { }
 }

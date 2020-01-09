@@ -84,7 +84,6 @@ export class AppComponent {
   }
 
   initializeApp() {
-    console.log('hello');
     if (isCordovaAvailable()) {
       document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
     }
@@ -92,7 +91,6 @@ export class AppComponent {
 
   async onDeviceReady() {
     const self = this;
-    console.log('hello');
     window['plugins'].OneSignal.startInit(
       ConfigData.oneSignal.appID,
       ConfigData.oneSignal.googleProjectId
@@ -101,60 +99,56 @@ export class AppComponent {
       window['plugins'].OneSignal.OSInFocusDisplayOption.Notification
     );
 
+    function notificationOpenedCallback(jsonData) {
+      self.storage.get('category').then(t => {
+        const categories = JSON.parse(t);
+        if (jsonData.notification.payload.additionalData.post) {
+          self.postService.getItemById(jsonData.notification.payload.additionalData.post).subscribe(p => {
+            const data: any = p;
+            const cat = data.categories && data.categories.length
+              ? categories.find(c => c.id === data.categories[0] || c.id === data.categories[1]) : null;
+            const post = {
+              'category': cat ? cat.name : '',
+              'categoryId': data.categories[0],
+              'title': data.title.rendered,
+              'time': data.date,
+              'image': '',
+              'id': data.id,
+              'link': data.link,
+              'content': data.content.rendered,
+              'mediaId': data.featured_media
+            };
+            if (post.mediaId && post.image === '') {
+              self.mediaService.getItemById(post.mediaId).subscribe(media => {
+                if (media['id'] === post['mediaId']) {
+                  post.image = media['source_url'];
+                }
+                const navigationExtras: NavigationExtras = {
+                  queryParams: { item: JSON.stringify(post) }
+                };
+                self.navController.navigateForward(['/single-page'], navigationExtras);
+              });
+            } else {
+              const navigationExtras: NavigationExtras = {
+                queryParams: { item: JSON.stringify(post) }
+              };
+              self.navController.navigateForward(['/single-page'], navigationExtras);
+            }
+          });
+        }
+      });
+    }
+
     window['plugins'].OneSignal.handleNotificationReceived(
       // notificationOpenedCallback
     );
     window['plugins'].OneSignal.handleNotificationOpened(
-      self.notificationOpenedCallback
+      notificationOpenedCallback
     );
     // window['plugins'].OneSignal.setSubscription(
     //   self.isPushNotificationEnabled
     // );
     window['plugins'].OneSignal.endInit();
-  }
-
-  notificationOpenedCallback(jsonData) {
-    this.storage.get('category').then(t => {
-      const categories = JSON.parse(t);
-      console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData.notification.payload.additionalData.post));
-      if (jsonData.notification.payload.additionalData.post) {
-        this.postService.getItemById(jsonData.notification.payload.additionalData.post).subscribe(p => {
-          const data: any = p;
-          const cat = data.categories && data.categories.length
-            ? categories.find(c => c.id === data.categories[0] || c.id === data.categories[1]) : null;
-          const post = {
-            'category': cat ? cat.name : '',
-            'categoryId': data.categories[0],
-            'title': data.title.rendered,
-            'time': data.date,
-            'image': '',
-            'id': data.id,
-            'link': data.link,
-            'content': data.content.rendered,
-            'mediaId': data.featured_media
-          };
-
-          if (post.mediaId && post.image === '') {
-            this.mediaService.getItemById(post.mediaId).subscribe(media => {
-              if (media['id'] === post['mediaId']) {
-                post.image = media['source_url'];
-              }
-              console.log(post);
-              const navigationExtras: NavigationExtras = {
-                queryParams: { item: JSON.stringify(post) }
-              };
-              this.navController.navigateForward(['/single-page'], navigationExtras);
-            });
-          } else {
-            console.log(post);
-            const navigationExtras: NavigationExtras = {
-              queryParams: { item: JSON.stringify(post) }
-            };
-            this.navController.navigateForward(['/single-page'], navigationExtras);
-          }
-        });
-      }
-    });
   }
 
   openSingleCategory(item) {
@@ -193,7 +187,6 @@ export class AppComponent {
       this.categories.sort((a, b) => {
         return a.orderIndex - b.orderIndex;
       });
-      console.log(this.categories);
       this.storage.set('category', JSON.stringify(storeItems));
     });
   }

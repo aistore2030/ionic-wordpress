@@ -65,7 +65,6 @@ export abstract class Service extends BaseService {
             query += `?timestepm=${new Date().getTime()}`;
         }
         const url = `${this.getRootUrl()}${query}`;
-        console.log(url);
         return this.api(url);
     }
 

@@ -19,6 +19,7 @@ export class NewsListPage {
   events: any = {};
   bookmarks: any = {};
   postPageLoaded = 1;
+  isInfiniteScrollActive = true;
 
   constructor(
     private postService: PostService,
@@ -33,7 +34,11 @@ export class NewsListPage {
   }
 
   doInfinite(event) {
-    this.loadData(this.categoryId, event);
+    if (this.isInfiniteScrollActive) {
+      this.loadData(this.categoryId, event);
+    } else {
+      event.target.complete();
+    }
   }
 
   itemClick(item) {
@@ -41,41 +46,44 @@ export class NewsListPage {
   }
 
   async loadData(categoryId, event) {
-    (await this.postService.getPostListWithFilter(categoryId, this.postPageLoaded++)).subscribe((data: Array<any>) => {
-      console.log('postService');
-      const newData = this.postId ? data.filter(it => it.id !== this.postId) : data;
-      this.posts = this.posts.concat(newData);
+    (await this.postService.getPostListWithFilter(categoryId, this.postPageLoaded++))
+      .subscribe((data: Array<any>) => {
+        if (data.length < 10) {
+          this.isInfiniteScrollActive = false;
+        }
+        const newData = this.postId ? data.filter(it => it.id !== this.postId) : data;
+        this.posts = this.posts.concat(newData);
 
-      if (event) {
-        console.log('event');
-        event.target.complete();
-      }
+        if (event) {
+          console.log('event');
+          event.target.complete();
+        }
 
-      newData.forEach(element => {
-        element.bookmark = this.bookmarks[element.id] ? true : false;
-        if (element.mediaId) {
-          this.mediaService.getItemById(element.mediaId).subscribe(media => {
-            this.posts.forEach(element => {
-              if (media['id'] === element['mediaId']) {
-                element.image = media['source_url'];
-              }
+        newData.forEach(element => {
+          element.bookmark = this.bookmarks[element.id] ? true : false;
+          if (element.mediaId) {
+            this.mediaService.getItemById(element.mediaId).subscribe(media => {
+              this.posts.forEach(element => {
+                if (media['id'] === element['mediaId']) {
+                  element.image = media['source_url'];
+                }
+              });
             });
-          });
+          }
+        });
+      },
+        err => {
+          console.log('err');
+          if (event) {
+            event.target.complete();
+          }
+        }, () => {
+          console.log('done');
+          if (event) {
+            event.target.complete();
+          }
         }
-      });
-    },
-      err => {
-        console.log('err');
-        if (event) {
-          event.target.complete();
-        }
-      }, () => {
-        console.log('done');
-        if (event) {
-          event.target.complete();
-        }
-      }
-    );
+      );
 
   }
 

@@ -35,7 +35,6 @@ export class BookmarkPage implements OnInit {
       if (this.searchTerm.length > 0) {
         if (myrecentPosts.indexOf(this.searchTerm) !== -1) {
           this.filteredNews.push(this.posts[i]);
-          console.log('newRecentPosts', this.filteredNews);
         }
       } else {
         this.filteredNews = this.posts;
@@ -50,10 +49,8 @@ export class BookmarkPage implements OnInit {
       // tslint:disable-next-line:forin
       for (const item in bookmarks) {
         this.posts.push(bookmarks[item]);
-        console.log('bookmark', this.posts);
       }
       this.filteredNews = this.posts;
-      console.log('bookmark', this.posts);
     });
   }
 
